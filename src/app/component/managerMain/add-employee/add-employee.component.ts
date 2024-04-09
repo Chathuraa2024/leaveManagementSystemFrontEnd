@@ -26,7 +26,9 @@ export class AddEmployeeComponent {
     gender: new FormControl('', Validators.required)
   });
 
-    constructor(private managerService: ManagerService , private router: Router,private _snackBar: MatSnackBar ) {
+    constructor(private managerService: ManagerService ,
+                private router: Router,
+                private snackBar: MatSnackBar ) {
     }
 
   submitApplication(){
@@ -38,14 +40,17 @@ export class AddEmployeeComponent {
           this.router.navigate(['/manageEmployee']);
         },
         (error) => {
-          console.error(error) })
+          this.openSnackBar('Error . Please try again.'); })
     }else{
-      this.openSnackBar('Invalid user name or Password','Try again')
+      this.openSnackBar('Error . Please try again.');
       this.applyForm.markAllAsTouched();
     }
   }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 }

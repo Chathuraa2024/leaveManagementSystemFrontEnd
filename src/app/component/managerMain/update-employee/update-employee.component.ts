@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ManagerService} from "../../../service/manager.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Component({
@@ -27,23 +28,20 @@ export class UpdateEmployeeComponent {
       status: new FormControl('true')
     });
   }
-
-  constructor(private managerService : ManagerService , private router: Router , private activatedRoute:ActivatedRoute ,private dataSharingService:DataSharingServiceService) {
+  constructor(private managerService : ManagerService ,
+              private router: Router ,
+              private activatedRoute:ActivatedRoute ,
+              private dataSharingService:DataSharingServiceService,
+              private snackBar: MatSnackBar) {
   }
-
-
   ngOnInit(){
     this.activatedRoute.params.subscribe(params => {
       this.userName = params['userName'];
-      console.log(this.userName);
     });
     document.body.classList.add('dim-background');
     this.setEmployeeId(this.userName)
     this.initializeForm();
-    console.log(this.employee)
-
   }
-
   setEmployeeId(username:string){
     this.employees =this.dataSharingService.getData();
     for(let employee1 of this.employees){
@@ -51,28 +49,28 @@ export class UpdateEmployeeComponent {
         this.employee = employee1
       }
     }
-
   }
-
-
   submit(){
     const jsonData = JSON.stringify(this.applyForm.value);
-    console.log(jsonData)
     this.managerService.updateEmployee(jsonData, this.userName).subscribe(
       (res) => {
-        console.log(res);
         this.router.navigate(['/manageEmployee']);
       },
       (error) => {
-        console.error(error);
-        // Handle error if necessary
+        this.openSnackBar('Error . Please try again.');
       }
     )
   }
-
   isGender(): void {
     if(this.employee.gender == "Female"){
       this.isMale = false;
     }
+  }
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 }

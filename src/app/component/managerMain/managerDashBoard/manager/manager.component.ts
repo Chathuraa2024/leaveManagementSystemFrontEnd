@@ -28,7 +28,11 @@ export class ManagerComponent {
     });
     this.getLeaveDetails();
   }
-  constructor(private employeeService: EmployeeServiceService,private leaveService : LeaveServiceService, private activatedRoute : ActivatedRoute,private router: Router,private dataSharingService: DataSharingServiceService ) {
+  constructor(private employeeService: EmployeeServiceService,
+              private leaveService : LeaveServiceService,
+              private activatedRoute : ActivatedRoute,
+              private router: Router,
+              private dataSharingService: DataSharingServiceService ) {
   }
   getLeaveDetails(){
     this.leaveService.getLeaveRequest().subscribe((res)=>{
@@ -38,36 +42,23 @@ export class ManagerComponent {
         let j =0;
         for(let i =0 ; i< res.data.length;i++) {
           if (!this.isWithinRange(new Date(res.data[i].startDate), this.startDay, 30)) {
-            console.log(i)
             continue;
           }
           if(res.data[i].accept === "NOT_LOOK"){
             this.isRes = true;
             this.leaveEmployees[j] = res.data[i];
-            console.log(this.leaveEmployees)
             j=j+1;
-          }
-
-        }
-      }
-    })
-  }
+          }}}})}
   isWithinRange(startDate: Date, comparisonDate: Date, dayRange: number): boolean {
     const dayInMilliseconds = 24 * 60 * 60 * 1000;
     const difference = Math.abs(comparisonDate.getTime() - startDate.getTime());
     return difference <= dayRange * dayInMilliseconds;
   }
-
   extractDateFromString(dateString: string): string | null {
     const regex = /^(\d{4}-\d{2}-\d{2})/;
     const match = dateString.match(regex);
     return match ? match[1] : null;
   }
-  // descript(){
-  //   this.isShow = true;
-  // }
-
-
   goLeaveManage(id : number) {
     this.dataSharingService.setData(id);
     this.router.navigate(["/leaveManage"])

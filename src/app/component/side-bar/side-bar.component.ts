@@ -19,9 +19,7 @@ export class SideBarComponent {
         }
   ngOnInit() {
     this.userName=this.userAuthService.getName()
-    console.log("user name "+ this.userName )
   }
-
   public onClick1(){
       if(this.loginService.roleEqual('EMPLOYEE')){
         const url = `/employee/${this.userName}`
@@ -31,10 +29,8 @@ export class SideBarComponent {
         this.router.navigate([url])
       }
   }
-
   public isLogin(){
     return this.userAuthService.isLoggedIn()
-
   }
   public clean(){
     this.userAuthService.clear()

@@ -20,30 +20,29 @@ export class ManagerDataChartComponent {
 
   @ViewChild('totalLeave', { static: false }) totalLeaveCanvas?: ElementRef;
 
-  constructor(private dataSharingService: DataSharingServiceService ,private userAuthService: UserAuthService, private leaveService: LeaveServiceService, private employeeService: EmployeeServiceService,private router:Router) {
+  constructor(private dataSharingService: DataSharingServiceService ,
+              private userAuthService: UserAuthService,
+              private leaveService: LeaveServiceService,
+              private employeeService: EmployeeServiceService,
+              private router:Router) {
   }
 
   ngAfterViewInit() {
     this.getUserName();
   const employeeCount = this.employeeService.getAllEmployeeCount();
   const leaveCount = this.leaveService.getCountAllEmployeeLeave();
-
   forkJoin([employeeCount, leaveCount]).subscribe({
     next: (results) => {
       this.employeeCount = results[0].data;
       this.leaveCount = results[1].data;
-      console.log(this.employeeCount, this.leaveCount);
       this.doughnutChart(this.leaveCount, this.employeeCount);
     },
     error: (error) => console.log(error)
   });
 }
-
-
   getUserName() {
     this.userName = this.userAuthService.getName();
   }
-
   doughnutChart(num1: number, num2: number) {
     if (!this.totalLeaveCanvas) return;
     const ctx = this.totalLeaveCanvas.nativeElement.getContext('2d');
@@ -59,11 +58,7 @@ export class ManagerDataChartComponent {
             'rgb(199,33,67)',
             'rgb(48,163,239)'
           ]
-        }]
-      }
-    });
-  }
-
+        }]}});}
   goHistory() {
     this.router.navigate(["/manageLeaveHistory"])
   }
