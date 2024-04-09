@@ -8,17 +8,14 @@ import {UserAuthService} from "./user-auth.service";
 })
 export class LoginServiceService {
   BASE_URL = "http://localhost:8080/api/v1";
-
   userName: string='';
   requestHeader = new HttpHeaders(
     {"No-Auth":"True"}
   );
-
-  constructor(private httpClient: HttpClient , private  userAuthService: UserAuthService) {
-
+  constructor(private httpClient: HttpClient ,
+  private  userAuthService: UserAuthService) {
   }
   public login(loginData: any) : Observable<any>{
-    // return this.httpClient.post(`$(this.BASE_URL)"/employee-manage/login",loginData`)
     const url = `${this.BASE_URL}/employee-manage/login`;
     return this.httpClient.post(url, loginData,{headers:this.requestHeader})
   }
@@ -26,7 +23,6 @@ export class LoginServiceService {
   public  roleEqual(allowRoles): boolean {
     let isMatch = false;
     const userRoles: any = this.userAuthService.getRoles();
-
     if (userRoles != null && userRoles) {
         if (allowRoles === userRoles[0].roleDescription) {
           isMatch = true;
@@ -36,10 +32,8 @@ export class LoginServiceService {
         }
     }
   }
-
   public UserName(userName: string){
     this.userName = userName;
     return this.userName;
   }
-
 }

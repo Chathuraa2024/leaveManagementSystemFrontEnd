@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {get} from "http";
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +15,20 @@ export class LeaveServiceService {
     const url = `${this.BASE_URL1}/get-all-leave`;
     return this.http.get(url)
   }
-
   putAcceptRequest(status : boolean, id: number) : Observable<any>{
     const url = `${this.BASE_URL1}/update-accept-leave/${id}`;
     return this.http.put(url,status);
   }
-
   getAEmployeeDetails(userName: string): Observable<any>{
     const url = `${this.BASE_URL2}/get-employee-by-id/${userName}`;
     return this.http.get(url)
   }
-
   getALeaveDetails(id: number): Observable<any>{
     const url = `${this.BASE_URL1}/get-leaver/${id}`;
     return this.http.get(url)
   }
   getLeaveListToday(date: any): Observable<any>{
     const url = `${this.BASE_URL1}/all-total-leaves-today/${date}`;
-    console.log(this.http.get(url))
     return this.http.get(url)
   }
   getDetailByLeaveBalance(userName: string){
@@ -46,19 +41,16 @@ export class LeaveServiceService {
   }
   public addLeave(jsonData: string) : Observable<any> {
       const url = `${this.BASE_URL1}/add-leave`;
-      console.log(jsonData)
       return this.http.post(url,jsonData)
   }
   public  getAllLeaveByUserName(userName: string): Observable<any>{
     const url = `${this.BASE_URL1}/get-detail-by-username/${userName}`;
     return this.http.get(url)
   }
-
   public getLeaveDetailsByUsername(userName: string,page: number,size: number): Observable<any>{
     const url = `${this.BASE_URL1}/get-leave-detail-by-username/${userName}/${page}/${size}`
     return this.http.get(url);
   }
-
   public deleteLeaveRequest(id: number): Observable<any>{
     const url = `${this.BASE_URL1}/delete-leave/${id}`
     return this.http.delete(url);
@@ -67,12 +59,10 @@ export class LeaveServiceService {
     const url = `${this.BASE_URL1}/count-of-employee-per-day`
     return this.http.get<any>(url);
   }
-
   getCountDayEmployeeLeave(date:any): Observable<any> {
     const url = `${this.BASE_URL1}/count-by-leave-per-day/${date}`
     return this.http.get(url);
   }
-
   editLeave(jsonData: string, id: number) {
     const url = `${this.BASE_URL1}/edit-leave/${id}`
     return this.http.put(url,jsonData);

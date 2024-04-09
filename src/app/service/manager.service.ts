@@ -17,32 +17,24 @@ export class ManagerService {
     const url = `${this.BASE_URL}/viewAll`;
     return this.http.get(url)
   }
-
   public  getAllEmployeePagination(page: number,size: number): Observable<any>{
     const url = `${this.BASE_URL}/viewAll/${page}/${size}`;
     return this.http.get(url)
   }
   public addEmployee(jsonData: any): Observable<any>{
     const url = `${this.BASE_URL}/add-employee`;
-    console.log(jsonData)
     return this.http.post(url,jsonData)
   }
   public updateEmployee(jsonData: any,id: string){
-    console.log(jsonData)
     const url = `${this.BASE_URL}/update-employee/${id}`;
-    console.log(url);
     return this.http.put(url,jsonData);
   }
   public  deleteEmployee(id:string): Observable<any>{
     const url = `${this.BASE_URL}/delete-employee/${id}`;
     return this.http.delete(url,{responseType: 'text'})
   }
-
   public getEmployeeById(userName: string): Observable<any>{
     const url = `${this.BASE_URL}/get-employee-by-id/${userName}`;
     return this.http.get(url);
   }
-
-
-
 }

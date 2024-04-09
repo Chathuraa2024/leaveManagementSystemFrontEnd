@@ -8,19 +8,10 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 export class DataSharingServiceService {
   private dataSubject = new BehaviorSubject<any>(null); // Initialize with null or default data
   data: any;
-
-  constructor() {
-  }
-
+  constructor() {}
   setData(data: any) {
     this.data = data;
-    console.log(data)
   }
-
   getData() {
     return this.data
-  }
-
-
-
-}
+  }}

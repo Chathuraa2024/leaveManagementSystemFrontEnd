@@ -9,25 +9,19 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'demoProjectFrontEnd';
-
   public role : any;
   public user : string='';
   private url : any;
   invertebrates: any;
-  fish: any;
-  amphibians: any;
   constructor(private userAuthService: UserAuthService, private router: Router) {
   }
   ngOnInit(){
     this.getUser();
     this.getRole();
-
   }
   public getUser(){
     this.user = this.userAuthService.getName();
-    console.log(this.user)
   }
-
   public getRole() {
     this.role = this.userAuthService.getRoles();
     if (this.role && this.role.length > 0) { // Check if role is defined and not empty
@@ -43,5 +37,4 @@ export class AppComponent {
       this.router.navigate(['/login']);
     }
   }
-
 }
