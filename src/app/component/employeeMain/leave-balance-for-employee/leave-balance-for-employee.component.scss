@@ -1,0 +1,31 @@
+.leave-balance-container{
+}
+.leave-balance-header{
+
+}
+
+.leave-balance-body{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+
+}
+
+.chart-test{
+  font-size: 30px;
+}
+
+.leave-add-text{
+  margin: 30px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f83b3b;
+  padding: 5px;
+}
+.leave-button{
+
+  border: #f83b3b solid 5px ;
+  margin-left: 40px;
+  margin-right: 40px;
+}

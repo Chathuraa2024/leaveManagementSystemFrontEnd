@@ -1,0 +1,87 @@
+<div class="d-flex flex-row min-vh-100 view">
+  <div class="sideBar" style="width:15%">
+    <app-side-bar ></app-side-bar>
+  </div>
+  <div class="container d-flex flex-column mx-5" style="width: 75%">
+    <div class="card my-5">
+      <div  class="card-header">
+        <div class="row"><h2>Leave History</h2></div>
+        <div class="row">
+          <form [formGroup]="applyForm" (ngSubmit)="search()">
+            <div class="d-flex flex-row  align-items-center align-content-center justify-content-center">
+                <div class="form-group col-md-3">
+                  <input type="text" class="form-control" id="employeeId" formControlName="employeeId">
+                </div>
+                <div class="form-group col-md-3">
+                  <select class="form-select form-select-lg" id="duration" formControlName="duration">
+                    <option selected>Select Leave Type</option>
+                    <option value="Annual">Annual</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Sick">Sick</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <input type="date" class="form-control" id="startDate" formControlName="startDate">
+                  </div>
+                </div>
+                <div class=" text-center">
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+                <div>
+                  <button type="button" class="btn mx-3" (click)="Refresh()"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
+                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+                  </svg></button>
+                </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive  ">
+          <table class="table table-dark table-hover">
+            <thead class="table-light">
+            <tr>
+              <th>User Name</th>
+              <th>Leave Type</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Description</th>
+              <th>Duration</th>
+              <th>Accept</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let leave of leaves"   >
+              <td>{{leave.employeeId}}</td>
+              <td>{{leave.leaveType}}</td>
+              <td>{{extractDateFromString(leave.startDate)}}</td>
+              <td>{{extractDateFromString(leave.endDate)}}</td>
+              <td>{{leave.description}}</td>
+              <td>{{leave.duration}}</td>
+              <td>{{leave.accept}}</td>
+              <td (click)="getDetails(leave.employeeId)" class="m-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                </svg>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row card chart ">
+      <div class="card-body col-4 d-flex align-items-center"><app-history-data-chart></app-history-data-chart></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

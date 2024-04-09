@@ -1,0 +1,23 @@
+.card{
+  width: auto;
+  height: auto;
+}
+
+.calendar-custom{
+  margin: 20px;
+  width: auto;
+  height: auto;
+
+  --fc-today-bg-color: rgba(08, 208, 208, 30);
+}
+
+.fc-dom-20{
+  background-color: black;
+}
+.fc {
+  font-size: 10px;
+}
+
+#calender {
+  background-color: rgba(211, 211, 211, 0.51);
+}

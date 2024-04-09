@@ -1,0 +1,41 @@
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+.table th {
+  font-size: 20px;
+}
+
+.table th, .table td {
+  vertical-align: top;
+}
+.btn{
+  width: 80px;
+}
+
+@media (max-width: 1400px) {
+  .table th, .table td {
+    padding: .5rem;
+    font-size: .875rem;
+  }
+}
+
+.table td {
+  word-break: break-word;
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+}

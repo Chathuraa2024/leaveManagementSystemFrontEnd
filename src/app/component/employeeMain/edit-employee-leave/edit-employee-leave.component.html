@@ -1,0 +1,53 @@
+
+    <div class="container">
+      <h2>{{id}}</h2>
+      <div class="form-container">
+        <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
+          <div class="form-group">
+            <label for="leaveType">Leave Type</label>
+            <select class="form-select form-select-lg mb-3"  id="leaveType" formControlName="leaveType" [(ngModel)]="leaveType" name="leaveType">
+              <option selected>Select Leave Type</option>
+              <option value="Annual">Annual</option>
+              <option value="Casual">Casual</option>
+              <option value="Sick">Sick</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <select class="form-select form-select-lg mb-3"  id="duration" formControlName="duration" [(ngModel)]="Duration" name="Duration">
+              <option selected>Select Duration</option>
+              <option value="Full" >Full</option>
+              <option value="Half">Half</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" class="form-control" id="startDate" formControlName="startDate" [(ngModel)]="startDate" name="startDate">
+          </div>
+          <div [ngSwitch]="Duration">
+            <div *ngSwitchCase="'Full'">
+              <div class="form-group">
+                <label for="endDate">End Date</label>
+                <input type="date" class="form-control" id="endDate" formControlName="endDate" [(ngModel)]="endDate" name="endDate">
+              </div>
+            </div>
+            <div *ngSwitchCase="'Half'">
+              <div class="form-group">
+                <label for="HF">Select Half</label>
+                <select class="form-select form-select-lg mb-3"  id="HF" formControlName="halfType" [(ngModel)]="halfType" name="halfType">
+                  <option selected>Select Half Type</option>
+                  <option value="1Half" >First Half(morning)</option>
+                  <option value="2Half">Second Half(evening)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" rows="3" [(ngModel)]="description" name="description"></textarea>
+          </div>
+          <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+

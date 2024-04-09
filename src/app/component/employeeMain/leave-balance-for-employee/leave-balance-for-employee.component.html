@@ -1,0 +1,45 @@
+<div *ngIf="!dashBord" class="d-flex flex-row">
+  <div class="card text-center " style="width: 25%; height: 8rem ; margin: 10px;border: 10px solid black ">
+    <div class="card-body " >
+      <p>Total All Leave = {{totalLeave}}</p>
+      <p>Remaining Leave = {{28-totalLeave}}</p>
+    </div>
+  </div>
+  <div class="card text-center" style="width: 25%; height: 8rem ; margin: 10px ;  border: 10px solid black">
+    <div class="card-body " >
+      <p>Total Annual Leave = {{14-leaveBalanceDetails.annualDays}}</p>
+      <p>Remaining Leave = {{leaveBalanceDetails.annualDays}}</p>
+    </div>
+  </div>
+  <div class="card text-center" style="width: 25%; height: 8rem ; margin: 10px;  border: 10px solid black ">
+    <div class="card-body ">
+      <p>Casual Leave = {{7- leaveBalanceDetails.casualDays}}</p>
+      <p>Remaining Leave = {{leaveBalanceDetails.casualDays}}</p>
+    </div>
+  </div>
+  <div class="card text-center" style="width: 25%; height: 8rem ; margin: 10px ;  border: 10px solid black">
+    <div class="card-body ">
+      <p>Sick Leave = {{7-leaveBalanceDetails.sickDays}}</p>
+      <p>Remaining Leave = {{leaveBalanceDetails.sickDays}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dashBord" class="container leave-balance-container">
+  <div class="card leave-balance">
+    <div class="card-header leave-balance-header" routerLink="/leaveHistory">
+      <h2>Leave Balance</h2>
+    </div>
+    <div class="card-body row d-flex leave-balance-body align-content-center justify-content-between">
+      <div class="chart col-3"><app-data-chart [dashBord]="dashBord"></app-data-chart></div>
+      <div class="chart-test col-3"><span>Leaves-{{totalLeave}}</span></div>
+      <div class="col-6 d-flex flex-column align-content-center">
+        <span class="leave-add-text">Click here to request a new leave</span>
+        <button class="leave-button " routerLink="/leaveAdding">Add leave</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

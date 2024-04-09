@@ -1,0 +1,84 @@
+<div class="d-flex flex-row view">
+  <div class="sideBar" style="width:15% ">
+    <app-side-bar ></app-side-bar>
+  </div>
+  <div class="container d-flex flex-column mx-5" style="width: 75%">
+    <div class="card my-5">
+      <div class="card-header">Leave Manage</div>
+      <div class="card-body">
+        <div class="table-responsive  ">
+          <table class="table table-dark table-hover">
+            <thead class="table-light">
+            <tr>
+              <th>User Name</th>
+              <th>Leave Type</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Description</th>
+              <th>Duration</th>
+              <th>Accept</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let leave of leaves"   >
+              <td>{{leave.employeeId}}</td>
+              <td>{{leave.leaveType}}</td>
+              <td>{{extractDateFromString(leave.startDate)}}</td>
+              <td>{{extractDateFromString(leave.endDate)}}</td>
+              <td>{{leave.description}}</td>
+              <td>{{leave.duration}}</td>
+              <td>{{leave.accept}}</td>
+              <td>
+                <button class=" btn btn-primary" (click)="Submit(true,leave.id)">Accept</button>
+              </td>
+              <td>
+                <button class=" btn btn-primary" (click)="Submit(false , leave.id)">Reject</button>
+              </td>
+              <td (click)="getDetails(leave.employeeId)" class="m-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                </svg>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row"><app-leave-manage-data-chart></app-leave-manage-data-chart></div>
+      <div class="row">
+        <div class="card m-3 col-3">
+          <div class="card-header"><h5>Day of leaver</h5></div>
+          <div class="card-body">
+            <input #date type="date" >
+            <button (click)="search(date.value)">Search</button>
+            <div class="">
+              <table *ngIf="isSearch" class="table" >
+                <thead class="thead-light">
+                <tr>
+                  <th>User Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let leave1 of tdLeaves" >
+                  <td (click)="viewEmployee(leave1)">{{leave1}}</td>
+                </tr>
+                </tbody>
+              </table>
+              <span *ngIf="!isSearch">Today not leaver</span>
+              <span *ngIf="isdate">Enter the date </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,22 @@
+
+
+<div class="card" (click)="goHistory()">
+  <div class="card-header"><h2>Leave Balance</h2></div>
+  <div class="card-body row">
+    <div class="col-7 d-flex justify-content-center">
+      <div style="display: block; width:200px;height: 200px" class="">
+        <canvas #totalLeave></canvas>
+      </div>
+    </div>
+    <div class="col-4 row">
+      <div class="card d-flex flex-row align-content-center justify-content-center align-items-center">
+        <div class="card-header"><h6>Total Employee</h6></div>
+        <div class="card-body">{{employeeCount}}</div>
+      </div>
+      <div class="card d-flex flex-row my-2 justify-content-center align-items-center">
+        <div class="card-header"><h6>Leave Employee</h6></div>
+        <div class="card-body">{{leaveCount}}</div>
+      </div>
+    </div>
+  </div>
+</div>

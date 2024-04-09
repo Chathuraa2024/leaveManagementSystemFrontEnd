@@ -1,0 +1,100 @@
+
+<div class="d-flex flex-row min-vh-100 view">
+  <div class="container">
+    <div class="main-body">
+      <div class="d-flex flex-row">
+        <div class="col-lg-6 col-6">
+          <div class="card m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img *ngIf="!isMale" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="rounded-circle p-1 bg-primary" width="80" height="80">
+                <img *ngIf="isMale" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                <div class="mt-3">
+                  <h4>{{employee.userName}}</h4>
+                  <p class="text-secondary mb-1">{{employee.firstname}} {{employee.lastName}}</p>
+                  <p class="text-muted font-size-sm">Office </p>
+                  <p class="text-muted font-size-sm">{{employee.workerRole}}</p>
+                </div>
+              </div>
+              <hr class="my-4">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    <i class="fa-brands fa-github"></i>
+                    <h6 class="m-1">Github</h6>
+                  </div>
+                  <span class="text-secondary">{{employee.gitHub}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h6 class="m-1">Privet Email</h6>
+                  </div>
+                  <span class="text-secondary">{{employee.pemail}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    <i class="fa-brands fa-skype"></i>
+                    <h6 class="m-1">Skype</h6>
+                  </div>
+                  <span class="text-secondary">{{employee.skype}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-row" >
+                  <p class="m-1">Full Name</p>
+                  <span class="text-secondary">{{employee.firstname}} {{employee.lastName}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-row">
+                  <p class="m-1">Company Email</p>
+                  <span class="text-secondary">{{employee.email}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card col-6 h-auto m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded ">
+          <div class="card-body">
+            <div class="container">
+              <div class="from-container">
+                <form [formGroup]="applyForm" >
+                  <div class="form-group">
+                    <label for="workSite" >Work Site</label>
+                    <input type="text" class="form-control" id="workSite" formControlName="workSite" name="workSite">
+                  </div>
+                  <div class="form-group">
+                    <label for="workerRole">Worker Role</label>
+                    <select class="form-select form-control form-select-lg mb-3" id="workerRole" formControlName="workerRole" name="workerRole">
+                      <option selected>Select Work Role</option>
+                      <option value="Software_Engineer">Software Engineer</option>
+                      <option value="Quality_Assurance">Quality Assurance (QA) Engineer</option>
+                      <option value="UX_Designer">UI/UX Designer</option>
+                      <option value="DevOps_Engineer">DevOps Engineer</option>
+                      <option value="System_Administrator">System Administrator</option>
+                      <option value="Security_Analyst">Security Analyst</option>
+                      <option value="Product_Manager">Product Manager</option>
+                      <option value="Business_Analyst">Business Analyst</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="currentProject">currentProject</label>
+                    <input type="text" class="form-control" id="currentProject" formControlName="currentProject" name="currentProject">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" name="password">
+                  </div>
+                  <div class="form-group">
+                    <label for="status">status</label>
+                    <input type="text" class="form-control" id="status" formControlName="status" name="status">
+                  </div>
+                  <button type="submit" class="btn-primary my-2 justify-content-center" (click)="submit()" data-bs-dismiss="modal" >Update now</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

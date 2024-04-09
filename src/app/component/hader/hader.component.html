@@ -1,0 +1,25 @@
+<div class="d-flex  bg-primary  " style=" justify-content: center; align-items: center; width: 100% ;height: 10%; margin-left: 10rem  ">
+  <div class="flex-fill text-start" style="padding-top: 10px">
+    <ul class=" navbar-nav " >
+      <li class="nav-item ">
+        <a *ngIf="loginService.roleEqual('MANAGER')" class=" nav-link " routerLink="/manager" >
+          <p class="text-center bg-white" style="font-weight: bold">Manager</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/employee" *ngIf="loginService.roleEqual('EMPLOYEE')">
+          <p class="text-center bg-white" style="font-weight: bold">Employee</p></a>
+      </li>
+  </ul>
+</div>
+<div class="flex-fill">
+  <p class="text-center position-fixed top-10 start-50 translate-middle" style="font-weight: bold; font-size: 35px; padding-top: 0px">Leave Management System</p>
+</div>
+<div class="flex-fill text-end justify-content-center align-content-center" >
+  <button *ngIf="!isLogin()" type="button" class="btn btn-dark font-weight-bold w-25 p-2" style="font-size: 20px" routerLink="/login">login</button>
+  <button *ngIf="isLogin()" type="button" class="btn btn-dark font-weight-bold w-25 p-2" style="font-size: 20px"  (click)="clean()">logout</button>
+</div>
+</div>
+
+
+

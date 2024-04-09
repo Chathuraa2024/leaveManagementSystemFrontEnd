@@ -1,0 +1,27 @@
+<div class="d-flex flex-row" style="height: 100%">
+  <div style="width: 20%">
+    <app-side-bar></app-side-bar>
+  </div>
+</div>
+<div class="d-flex flex-row" style="height: 100%">
+  <div style="width: 20%">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="d-flex flex-column">
+      <h2 class="text-center "> {{userName}}</h2>
+      <a href="https://example.com">Profile</a>
+      <a href="https://example.com">History</a>
+    </div>
+    <div class="d-flex flex-column">
+      <p>Total Leave = </p>
+      <h4>Available Leave</h4>
+      <p>Annual = </p>
+      <p>Casual = </p>
+      <p>Sick = </p>
+      <button (click)="submit()">update</button>
+    </div>
+  </div>
+</div>
+
+

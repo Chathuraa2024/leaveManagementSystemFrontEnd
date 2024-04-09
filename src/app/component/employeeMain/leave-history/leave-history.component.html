@@ -1,0 +1,57 @@
+<div class="d-flex flex-row view" style=" height: auto">
+  <div class="sideBar" style="width:15%;">
+    <app-side-bar ></app-side-bar>
+  </div>
+  <div style="width: 65%; height: auto" class="d-flex flex-column">
+    <div class="card w-auto border-secondary h-auto m-5 d-flex flex-column">
+      <div class="card-header"> <h2>Leave History</h2></div>
+      <div class="card-body ">
+        <table class="table table-hover table-primary table-striped table-responsive-xl" >
+          <thead class="thead-light">
+          <tr>
+            <th>Leave Type</th>
+            <th>Start Date/Time</th>
+            <th>End Date</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Accept</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let employee of employees" >
+            <td>{{employee.leaveType}}</td>
+            <td>{{extractDateFromString(employee.startDate)}}</td>
+            <td>{{extractDateFromString(employee.endDate)}}</td>
+            <td>{{employee.description}}</td>
+            <td>{{employee.duration}}</td>
+            <td>{{employee.accept}}</td>
+            <td>
+              <button class="btn-primary" (click)="updateEmployee(employee.userName)">UPDATE</button>
+            </td>
+            <td>
+              <button class="btn-primary" (click)="delete(employee.userName)">DELETE</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center" style="cursor: pointer" >
+            <li class="page-item"><a class="page-link" (click)="movePage(false)">Previous</a></li>
+            <li class="page-item"><a class="page-link" (click)="pagination(page+1)" >{{page+1}}</a></li>
+            <li class="page-item"><a class="page-link" (click)="pagination(page+2)">{{page+2}}</a></li>
+            <li class="page-item"><a class="page-link" (click)="pagination(page+3)">{{page+3}}</a></li>
+            <li class="page-item"><a class="page-link" (click)="movePage(true)">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="card mx-5" style="width: 50rem" >
+      <div class="card-header">
+        <h3>Leave Date Analysis</h3>
+      </div>
+      <div class="card-body mx-auto ">
+        <app-data-chart></app-data-chart>
+      </div>
+    </div>
+  </div>
+</div>

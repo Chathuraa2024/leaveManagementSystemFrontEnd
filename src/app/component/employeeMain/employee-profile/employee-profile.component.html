@@ -1,0 +1,218 @@
+<div class="d-flex flex-row view" style=" height: auto">
+  <div class="sideBar" style="width:15%;">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="container" style="width: 85%">
+    <div class="main-body">
+      <div class="d-flex flex-row">
+        <div class="col-lg-4 w-50">
+          <div class="card m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                <div class="mt-3">
+                  <h4>{{username}}</h4>
+                  <p class="text-secondary mb-1">{{firstname}} {{lastName}}</p>
+                  <p class="text-muted font-size-sm">Office </p>
+                  <p class="text-muted font-size-sm">{{workerRole}}</p>
+                </div>
+              </div>
+              <hr class="my-4">
+              <ul *ngIf="!isEdit" class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    <i class="fa-brands fa-github"></i>
+                    <h6 class="m-1">Github</h6>
+                  </div>
+                  <span class="text-secondary">{{gitHub}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h6 class="m-1">Privet Email</h6>
+                  </div>
+                  <span class="text-secondary">{{pemail}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    <i class="fa-brands fa-skype"></i>
+                    <h6 class="m-1">Skype</h6>
+                  </div>
+                  <span class="text-secondary">{{skype}}</span>
+                </li>
+                <li class="list-group-item text-end">
+                  <a  class="text-secondary link-dark " style="cursor: pointer; font-size: 18px" (click)="edit()">Edit</a>
+                </li>
+              </ul>
+              <div *ngIf="isEdit" class="container">
+                <div class="from-container">
+                  <form [formGroup]="applyForm" >
+                    <div class="form-group d-flex flex-row mb-3">
+                      <div class="col-sm-3">
+                        <label for="gitHub" class="mb-0" >GitHub</label>
+                      </div>
+                      <div class="col-sm-9 text-secondary ">
+                        <input type="text" class="form-control" id="gitHub" formControlName="gitHub" [(ngModel)]="gitHub" name="gitHub">
+                      </div>
+                    </div>
+                    <div class="form-group d-flex flex-row mb-3">
+                      <div class="col-sm-3">
+                        <label for="pemail">Privet Email</label>
+                      </div>
+                      <div class="col-sm-9 text-secondary ">
+                        <input type="text" class="form-control" id="pemail" formControlName="pemail" [(ngModel)]="pemail" name="pemail">
+                      </div>
+                    </div>
+                    <div class="form-group d-flex flex-row mb-3">
+                      <div class="col-sm-3">
+                        <label for="skype">Skype</label>
+                      </div>
+                      <div class="col-sm-9 text-secondary disabled ">
+                        <input type="text" class="form-control" id="skype" formControlName="skype" [(ngModel)]="skype" name="skype">
+                      </div>
+                    </div>
+                    <div class="row justify-content-between">
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-3 text-secondary">
+                        <input type="button" class="btn btn-primary px-4" (click)="[edit(),submit()]" value="Save Changes">
+                      </div>
+                      <div class="col-sm-3 text-secondary">
+                        <input type="button" class="btn btn-primary px-4" (click)="Back()" value="Go back">
+                      </div>
+                      <div class="col-sm-1"></div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-50">
+          <div class="d-flex flex-column">
+            <div class="col-lg-8 mt-4 mx-4" style="width: auto">
+              <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-body">
+                  <div class="container">
+                    <ul class="list-group list-group-flush w-100">
+                      <li class="list-group-item d-flex justify-content-between align-items-center flex-row" >
+                        <p class="m-1">Full Name</p>
+                        <span class="text-secondary">{{firstname}} {{lastName}}</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center flex-row">
+                        <p class="m-1">Company Email</p>
+                        <span class="text-secondary">{{email}}</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center flex-row">
+                        <p class="m-1">Current Project</p>
+                        <span class="text-secondary">{{currentProject}}</span>
+                      </li>
+                      <li *ngIf="!isChangePa" class="list-group-item d-flex justify-content-between align-items-center flex-row">
+                        <p class="m-1">Password</p>
+                        <a class="text-secondary" (click)="changePassword()">change password</a>
+                      </li>
+                      <div *ngIf="isChangePa" class="container">
+                        <div class="from-container">
+                          <div class="text-center">
+                            <h3>Change Password</h3>
+                          </div>
+                          <form [formGroup]="applyForm" >
+                            <div class="form-group d-flex flex-column mb-3">
+                              <div class="col-sm-5">
+                                <label for="beFroPassword" class="mb-0" >Be for Password</label>
+                              </div>
+                              <div class="col-sm-9 text-secondary ">
+                                <input type="password" class="form-control" id="beFroPassword" formControlName="beFroPassword" name="beFroPassword">
+                              </div>
+                            </div>
+                            <div class="form-group d-flex flex-column mb-3">
+                              <div class="col-sm-5">
+                                <label for="newPassword">New Password</label>
+                              </div>
+                              <div class="col-sm-9 text-secondary ">
+                                <input type="password" class="form-control" id="newPassword" formControlName="newPassword" name="newPassword">
+                              </div>
+                              <div *ngIf="isValid" class=" ">
+                                <p>Please create a password that meets the following criteria:</p>
+                                <ul>
+                                  <li>At least 8 characters long</li>
+                                  <li>Contains at least one uppercase letter (A-Z)</li>
+                                  <li>Contains at least one lowercase letter (a-z)</li>
+                                  <li>Includes at least one digit (0-9)</li>
+                                </ul>
+                                <p>A strong password helps protect your account against unauthorized access.</p>
+                              </div>
+                            </div>
+                            <div class="form-group d-flex flex-column mb-3">
+                              <div class="col-sm-5">
+                                <label for="conformPassword">Conform Password </label>
+                              </div>
+                              <div class="col-sm-9 text-secondary disabled ">
+                                <input type="password" class="form-control" id="conformPassword" formControlName="conformPassword" name="conformPassword">
+                              </div>
+                            </div>
+                            <div class="row justify-content-between">
+                              <div class="col-sm-1"></div>
+                              <div class="col-sm-3 text-secondary">
+                                <input type="button" class="btn btn-primary px-4" (click)="submitPasword()" value="Save Changes">
+                              </div>
+                              <div class="col-sm-3 text-secondary">
+                                <input type="button" class="btn btn-primary px-4" (click)="Back()" value="Go back">
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8  m-4" style="width: auto">
+              <div class="card h-auto shadow-lg p-3  bg-body-tertiary rounded">
+                <div class="card-body h-auto">
+                  <div class="container">
+                    <div class="from-container">
+                      <form [formGroup]="applyForm" >
+                        <div class="form-group d-flex flex-row mb-3">
+                          <div class="col-sm-3">
+                            <label for="address" class="mb-0" >Address</label>
+                          </div>
+                          <div class="col-sm-9 text-secondary ">
+                            <input type="text" class="form-control" id="address" formControlName="address"  [(ngModel)]="address" name="address">
+                          </div>
+                        </div>
+                        <div class="form-group d-flex flex-row mb-3">
+                          <div class="col-sm-3">
+                            <label for="contactNumber">Contact Number</label>
+                          </div>
+                          <div class="col-sm-9 text-secondary ">
+                            <input type="number" class="form-control" id="contactNumber" formControlName="contactNumber" [(ngModel)]="contactNumber" name="contactNumber">
+                          </div>
+                        </div>
+                        <div class="form-group d-flex flex-row mb-3">
+                          <div class="col-sm-3">
+                            <label for="status">Status</label>
+                          </div>
+                          <div class="col-sm-9 text-secondary disabled ">
+                            <input type="status" class="form-control" id="status" formControlName="status" name="status">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3"></div>
+                          <div class="col-sm-9 text-secondary">
+                            <input type="button" class="btn btn-primary px-4" (click)="submit()" value="Save Changes">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.card {
+  margin-top: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #343a40; /* Dark background color for table header */
+  color: #fff; /* Text color for table header */
+}
+
+
+.btn {
+  padding: 6px 12px;
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+}
+
+.search{
+  button:hover {
+      background-color: #043585;
+      border-color: #0862c7;
+    }
+  }
+
+.search button{
+  border-radius: 5px;
+  margin-left: 10px;
+  color: #fff; /* Text color */
+  background-color: #007bff; /* Button background color */
+  border-color: #007bff;
+}

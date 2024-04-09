@@ -1,0 +1,65 @@
+<div class="main bg-primary">
+  <div class="container">
+    <div class="row mb-2">
+      <div class=" text-center welcome-message">
+        <span>Welcome to the Leave Management System</span>
+      </div>
+    </div>
+    <div class="curd row sign-in-button">
+      <div class="row mb-3">
+        <div class="col text-center sign-message">
+          <span>Sign in to your Account</span>
+        </div>
+      </div>
+    </div>
+    <div class="card w-auto border-black rounded-5 ">
+      <div class="card-body ">
+        <div class="d-flex justify-content-center">
+          <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+            <div>
+              <input
+                type="text"
+                ngModel
+                name="username"
+                id="username"
+                placeholder="Enter your User Name"
+                class="form-control mb-3 border-primary"
+                required
+              >
+              <div *ngIf="loginForm.controls['username']?.invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="text-danger">
+                Username is required
+              </div>
+            </div>
+            <div>
+              <input
+                type="password"
+                ngModel
+                name="userPassword"
+                id="userPassword"
+                placeholder="Enter your Password"
+                class="form-control mb-3 border-primary"
+                minlength="6"
+                required
+              >
+              <div *ngIf="loginForm.controls['userPassword']?.invalid && (loginForm.controls['userPassword'].dirty || loginForm.controls['userPassword'].touched)" class="text-danger">
+                Password is required
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" value="Login" class="btn btn-outline-primary form-control rounded-5 w-50 mx-auto" [disabled]="loginForm.invalid">Login</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn">Forget Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
