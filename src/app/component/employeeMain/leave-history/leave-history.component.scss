@@ -1,0 +1,17 @@
+.main{
+  width: 65%;
+  height: auto;
+  display: flex ;
+  flex-direction: column
+}
+
+.main-card{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto
+}
+
+.last-card{
+  width: 50rem
+}

@@ -8,12 +8,8 @@ import {DataSharingServiceService} from "../../../service/data-sharing-service.s
   styleUrl: './manage-employee.component.scss'
 })
 export class ManageEmployeeComponent {
-
-
   constructor(private router:Router ) {
   }
-
-
   addOne() {
     this.router.navigate(['/addEmployee'])
   }

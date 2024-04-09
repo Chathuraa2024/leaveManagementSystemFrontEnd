@@ -80,7 +80,6 @@ export class LeaveManageDataChartComponent {
   }
 
   barChart() {
-    console.log(this.SE)
     if (!this.myChartCanvas) return;
     const ctx1 = this.myChartCanvas.nativeElement.getContext('2d');
     if (!ctx1) return;
@@ -125,7 +124,6 @@ export class LeaveManageDataChartComponent {
       }
     };
     this.barChartInstance = new Chart(ctx1, barChartConfig);
-
   }
 
   search(date:any | null) {
@@ -143,7 +141,6 @@ export class LeaveManageDataChartComponent {
       next: (results) => {
         this.employee = results[0].data;
         this.leave = results[1].data;
-        console.log(this.employee, this.leave);
         this.doughnutChart(this.leave, this.employee);
       },
       error: (error) => console.log(error)
@@ -154,12 +151,9 @@ export class LeaveManageDataChartComponent {
     this.leaveService.getLeaveListToday(date).subscribe(
       (res) => {
         this.totalLeave = res.data;
-        console.log(this.totalLeave);
         this.countTodayEmployee(this.empl, this.totalLeave);
       });
   }
-
-
   getAllEmployee(date: string) {
     this.SE=0
     this.QA=0
@@ -172,7 +166,6 @@ export class LeaveManageDataChartComponent {
     this.managerService.getAllEmployee().subscribe(
       (res) => {
         this.empl = res.data;
-        console.log(this.empl)
         for(let e of  this.empl){
           let role: string = e.workerRole
           switch (role) {
@@ -202,12 +195,8 @@ export class LeaveManageDataChartComponent {
               break
           }
         }
-        console.log(this.empl)
         this.getTodayLeaveEmployee(date);
-      }
-    )
-
-  }
+      })}
 
   countTodayEmployee(empl: any , totalEmployee: any){
     for(let t of totalEmployee){
@@ -239,10 +228,7 @@ export class LeaveManageDataChartComponent {
             case 'Business_Analyst':
               this.BA--;
               break
-          }
-        }
-      }
-    }
+          }}}}
     this.barChart();
   }
 

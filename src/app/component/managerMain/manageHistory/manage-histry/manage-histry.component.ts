@@ -28,7 +28,6 @@ export class ManageHistryComponent {
   getLeaveRequest(){
     this.leaveService.getLeaveRequest().subscribe(
       (res)=> {
-        console.log(res.data)
         this.leaves = res.data;
       }
     )
@@ -38,9 +37,8 @@ export class ManageHistryComponent {
     const match = dateString.match(regex);
     return match ? match[1] : null;
   }
-
   getDetails(leave1: any) {
-    const url = `/leaveDetails/${leave1}`
+    const url = `/updateEmployee/${leave1}`
     this.router.navigate([url])
   }
 
@@ -48,11 +46,8 @@ export class ManageHistryComponent {
     let userName = this.applyForm.get('employeeId')?.value;
     const leaveType = this.applyForm.get('duration')?.value;
     const startDate = this.applyForm.get('startDate')?.value;
-    console.log(userName,leaveType,startDate)
-    let filteredLeaves = this.leaves; // Assuming allLeaves is your array containing all leaves
-
+    let filteredLeaves = this.leaves;
     if (userName && ( userName != "Enter User Name")) {
-      console.log(userName);
       filteredLeaves = filteredLeaves.filter((leave: any) => leave.employeeId === userName);
       if(filteredLeaves.size=0){
         filteredLeaves = this.leaves;
@@ -62,18 +57,14 @@ export class ManageHistryComponent {
       filteredLeaves = filteredLeaves.filter((leave: any) => leave.leaveType === leaveType);
       if(filteredLeaves.size=0){
         filteredLeaves = this.leaves;
-      }
-    }
+      }}
     if (startDate) {
       filteredLeaves = filteredLeaves.filter((leave: any) => new Date(leave.startDate).getTime() === new Date(startDate).getTime());
       if(filteredLeaves.size=0){
         filteredLeaves = this.leaves;
-      }
-    }
-    console.log(filteredLeaves);
+      }}
     this.leaves = filteredLeaves;
   }
-
   Refresh() {
     this.getLeaveRequest();
   }

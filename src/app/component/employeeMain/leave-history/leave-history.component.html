@@ -1,9 +1,9 @@
-<div class="d-flex flex-row view" style=" height: auto">
-  <div class="sideBar" style="width:15%;">
+<div class="d-flex flex-row view">
+  <div class="sideBar">
     <app-side-bar ></app-side-bar>
   </div>
-  <div style="width: 65%; height: auto" class="d-flex flex-column">
-    <div class="card w-auto border-secondary h-auto m-5 d-flex flex-column">
+  <div class="main">
+    <div class="main-card card border-secondary m-5">
       <div class="card-header"> <h2>Leave History</h2></div>
       <div class="card-body ">
         <table class="table table-hover table-primary table-striped table-responsive-xl" >
@@ -25,12 +25,6 @@
             <td>{{employee.description}}</td>
             <td>{{employee.duration}}</td>
             <td>{{employee.accept}}</td>
-            <td>
-              <button class="btn-primary" (click)="updateEmployee(employee.userName)">UPDATE</button>
-            </td>
-            <td>
-              <button class="btn-primary" (click)="delete(employee.userName)">DELETE</button>
-            </td>
           </tr>
           </tbody>
         </table>
@@ -45,7 +39,7 @@
         </nav>
       </div>
     </div>
-    <div class="card mx-5" style="width: 50rem" >
+    <div class="last-card card mx-5"  >
       <div class="card-header">
         <h3>Leave Date Analysis</h3>
       </div>

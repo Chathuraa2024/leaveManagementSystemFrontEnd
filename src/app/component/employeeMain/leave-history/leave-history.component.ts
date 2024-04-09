@@ -26,8 +26,6 @@ export class LeaveHistoryComponent {
     this.userName = this.userAuthService.getName();
   }
 
-
-
   extractDateFromString(dateString: string): string | null {
     const regex = /^(\d{4}-\d{2}-\d{2})/;
     const match = dateString.match(regex);
@@ -43,29 +41,13 @@ export class LeaveHistoryComponent {
       }
     )
   }
-
-
-
   movePage(isNext: boolean) {
     if(isNext){
       this.page = this.page+1;
     }else {
       if(this.page > 0){
         this.page = this.page-1;
-        console.log(this.page)
       }
     }
   }
-
-
-  updateEmployee(userName: any) {
-
-  }
-
-  delete(userName: any) {
-
-  }
-
-
-
 }

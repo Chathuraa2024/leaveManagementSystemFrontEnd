@@ -46,7 +46,6 @@ import { ManageHistryComponent } from './component/managerMain/manageHistory/man
 import { ManagerDataChartComponent } from './component/managerMain/managerDashBoard/manager-data-chart/manager-data-chart.component';
 import { LeaveManageDataChartComponent } from './component/managerMain/leaveManager/leave-manage-data-chart/leave-manage-data-chart.component';
 import { HistoryDataChartComponent } from './component/managerMain/manageHistory/history-data-chart/history-data-chart.component';
-import { TodayLeaveEmployeeComponent } from './component/managerMain/leaveManager/today-leave-employee/today-leave-employee.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +73,6 @@ import { TodayLeaveEmployeeComponent } from './component/managerMain/leaveManage
     ManagerDataChartComponent,
     LeaveManageDataChartComponent,
     HistoryDataChartComponent,
-    TodayLeaveEmployeeComponent,
   ],
   imports: [
     BrowserModule,

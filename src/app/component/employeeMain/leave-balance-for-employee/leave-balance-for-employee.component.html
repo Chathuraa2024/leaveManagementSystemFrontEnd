@@ -1,23 +1,23 @@
 <div *ngIf="!dashBord" class="d-flex flex-row">
-  <div class="card text-center " style="width: 25%; height: 8rem ; margin: 10px;border: 10px solid black ">
+  <div class="main1 card text-center " >
     <div class="card-body " >
       <p>Total All Leave = {{totalLeave}}</p>
       <p>Remaining Leave = {{28-totalLeave}}</p>
     </div>
   </div>
-  <div class="card text-center" style="width: 25%; height: 8rem ; margin: 10px ;  border: 10px solid black">
+  <div class="main1 card text-center">
     <div class="card-body " >
       <p>Total Annual Leave = {{14-leaveBalanceDetails.annualDays}}</p>
       <p>Remaining Leave = {{leaveBalanceDetails.annualDays}}</p>
     </div>
   </div>
-  <div class="card text-center" style="width: 25%; height: 8rem ; margin: 10px;  border: 10px solid black ">
+  <div class="main1 card text-center">
     <div class="card-body ">
       <p>Casual Leave = {{7- leaveBalanceDetails.casualDays}}</p>
       <p>Remaining Leave = {{leaveBalanceDetails.casualDays}}</p>
     </div>
   </div>
-  <div class="card text-center" style="width: 25%; height: 8rem ; margin: 10px ;  border: 10px solid black">
+  <div class="main1 card text-center">
     <div class="card-body ">
       <p>Sick Leave = {{7-leaveBalanceDetails.sickDays}}</p>
       <p>Remaining Leave = {{leaveBalanceDetails.sickDays}}</p>

@@ -19,29 +19,23 @@ export class LeaveBalanceForEmployeeComponent {
     this.getUsername();
     this.getLeaveBalanceDetails(this.userName);
     this.getTotalLeave(this.userName);
-    console.log(this.dashBord)
   }
 
   constructor(private leaveService: LeaveServiceService, private userAuthService: UserAuthService) {
   }
-
   getUsername() {
     this.userName = this.userAuthService.getName()
   }
-
   getLeaveBalanceDetails(userName: string) {
     this.leaveService.getDetailByLeaveBalance(userName).subscribe(
       (res: any) => {
         this.leaveBalanceDetails = res.data;
-        console.log(this.leaveBalanceDetails)
       })
   }
-
   getTotalLeave(userName: string) {
     this.leaveService.getTotalLeavesByEmployee(userName).subscribe(
       (res: any) => {
         this.totalLeave = res.data;
-        console.log(this.totalLeave)
       }, error => {
         console.log(error);
       }

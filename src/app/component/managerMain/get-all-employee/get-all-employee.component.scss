@@ -39,6 +39,9 @@
 }
 
 .search{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   button:hover {
       background-color: #043585;
       border-color: #0862c7;
@@ -51,4 +54,11 @@
   color: #fff; /* Text color */
   background-color: #007bff; /* Button background color */
   border-color: #007bff;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

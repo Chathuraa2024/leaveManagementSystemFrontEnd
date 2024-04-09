@@ -13,14 +13,10 @@ import {ManagerService} from "../../../../service/manager.service";
   styleUrl: './history-data-chart.component.scss'
 })
 export class HistoryDataChartComponent {
-  private userName: string = '';
-  private totalLeave: any=[];
   public employee: number =0;
   public leave: number=0
   public leaveCount: Observable<any> = new Observable();
   public date: Date = new Date();
-
-
   @ViewChild('myChart', {static: false}) myChartCanvas?: ElementRef;
   private empl:any=[];
   private JN: number=0;
@@ -45,16 +41,13 @@ export class HistoryDataChartComponent {
     this.getAllEmployeeLeave()
   }
 
-
   lineChart() {
     if (!this.myChartCanvas) return;
     const ctx1 = this.myChartCanvas.nativeElement.getContext('2d');
     if (!ctx1) return;
-
     const monthlyData: number[] = [
       this.JN, this.FE, this.MA, this.APR, this.MAY, this.JUN, this.JUN, this.AUG, this.SEP, this.OCT, this.NOV, this.DEC
     ];
-
     const months = [
       'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'
@@ -88,7 +81,6 @@ export class HistoryDataChartComponent {
     this.leaveService.getLeaveRequest().subscribe(
       (res) => {
         this.empl = res.data;
-        console.log ()
         for(let e of  this.empl){
           let month: number | null = this.extractMonthFromString(e.startDate)
           switch (month) {
@@ -131,12 +123,8 @@ export class HistoryDataChartComponent {
 
           }
         }
-        // console.log(this.empl)
-        // this.getTodayLeaveEmployee(date);
         this.lineChart()
-      }
-    )
-
+      })
   }
   extractMonthFromString(dateString: string): number | null {
     const regex = /^(\d{4})-(\d{2})-\d{2}/;
@@ -148,6 +136,4 @@ export class HistoryDataChartComponent {
       return null;
     }
   }
-
-
 }
