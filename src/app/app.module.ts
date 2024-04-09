@@ -11,7 +11,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RouterLink, RouterModule} from "@angular/router";
 import { ManagerComponent } from './component/managerMain/managerDashBoard/manager/manager.component';
 import { EmployeeComponent } from './component/employeeMain/employee/employee.component';
-import { HaderComponent } from './component/hader/hader.component';
 import { ForbidderComponent } from './component/forbidder/forbidder.component';
 import {authGuard} from "./component/auth/auth.guard";
 import {AuthInterceptor} from "./component/auth/auth.interceptor";
@@ -40,7 +39,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import {CalendarComponent} from "./component/calendar/calendar.component";
-import { FullCalendarModule } from '@fullcalendar/angular'; // FullCalendar module
+import { FullCalendarModule } from '@fullcalendar/angular';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ClockComponent } from './component/clock/clock.component';
 import { ManageHistryComponent } from './component/managerMain/manageHistory/manage-histry/manage-histry.component';
@@ -55,7 +54,6 @@ import { TodayLeaveEmployeeComponent } from './component/managerMain/leaveManage
     LoginComponent,
     ManagerComponent,
     EmployeeComponent,
-    HaderComponent,
     ForbidderComponent,
     SideBarComponent,
     ManageEmployeeComponent,

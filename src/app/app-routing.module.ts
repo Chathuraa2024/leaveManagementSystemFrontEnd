@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./component/login/login.component";
 import {ManagerComponent} from "./component/managerMain/managerDashBoard/manager/manager.component";
 import {EmployeeComponent} from "./component/employeeMain/employee/employee.component";
-import {HaderComponent} from "./component/hader/hader.component";
 import {ForbidderComponent} from "./component/forbidder/forbidder.component";
 import {authGuard} from "./component/auth/auth.guard";
 import {ManageEmployeeComponent} from "./component/managerMain/manage-employee/manage-employee.component";
@@ -22,7 +21,6 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'manager/:userName',component:ManagerComponent, canActivate: [authGuard], data:{roles:['MANAGER']}},
   {path:'employee/:userName',component:EmployeeComponent,canActivate: [authGuard], data:{roles:['EMPLOYEE']}},
-  {path:'header', component:HaderComponent},
   {path:'forbidden', component:ForbidderComponent},
   {path:'manageEmployee', component:ManageEmployeeComponent,canActivate: [authGuard], data:{roles:['MANAGER']}},
   {path:'updateEmployee/:userName' , component:UpdateEmployeeComponent ,canActivate: [authGuard], data:{roles:['MANAGER']}},
