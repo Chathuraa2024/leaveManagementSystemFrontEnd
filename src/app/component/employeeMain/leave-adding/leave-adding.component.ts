@@ -39,9 +39,7 @@ export class LeaveAddingComponent {
 
 
   submitApplication(){
-    console.log(this.applyForm.value)
     const jsonData = JSON.stringify(this.applyForm.value);
-    console.log(jsonData)
     this.leaveService.addLeave(jsonData).subscribe((res) => {
         if(res){
           this.openSnackBar("is Leave Add",res.data)
@@ -50,14 +48,12 @@ export class LeaveAddingComponent {
         }
       },
       (error) => {
-        console.error(error)
+        this.openSnackBar("leave Subbmition fial","can you try")
     })
   }
-
   getUserName(){
     this.userName = this.userAuthService.getName()
   }
-
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action,{horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,});

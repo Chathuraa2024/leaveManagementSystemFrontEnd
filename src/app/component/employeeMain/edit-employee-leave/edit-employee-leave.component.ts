@@ -11,7 +11,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class EditEmployeeLeaveComponent {
   Duration: any;
-
   @Input() id!: number;
   leaveDetails : any = "";
   leaveType: any;
@@ -19,9 +18,7 @@ export class EditEmployeeLeaveComponent {
   endDate:any;
   halfType: any;
   description: any;
-
   applyForm = new FormGroup({
-
     leaveType: new FormControl(''),
     startDate: new FormControl(''),
     endDate: new FormControl(''),
@@ -30,19 +27,18 @@ export class EditEmployeeLeaveComponent {
     duration: new FormControl(''),
   });
 
-
   ngOnInit(){
-    console.log(this.id)
     this.getLeaveById(this.id);
   }
 
-  constructor( private activatedRoute: ActivatedRoute , private leaveService: LeaveServiceService, private router: Router) {
+  constructor( private activatedRoute: ActivatedRoute ,
+               private leaveService: LeaveServiceService,
+               private router: Router) {
   }
 
 
   getLeaveById(id: number){
     this.leaveService.getALeaveDetails(id).subscribe((res)=>{
-
         this.leaveDetails = res.data
       this.leaveType = this.leaveDetails.leaveType;
         this.startDate= this.extractDateFromString(this.leaveDetails.startDate);
@@ -50,7 +46,6 @@ export class EditEmployeeLeaveComponent {
         this.halfType = this.leaveDetails.halfType;
         this.description = this.leaveDetails.description;
         this.Duration  = this.leaveDetails.duration;
-        console.log(this.leaveDetails.leaveType);
     })
   }
 
@@ -60,7 +55,6 @@ export class EditEmployeeLeaveComponent {
     return match ? match[1] : null;
   }
   submitApplication() {
-    console.log(this.applyForm.value)
     const jsonData = JSON.stringify(this.applyForm.value);
     console.log(jsonData)
     this.leaveService.editLeave(jsonData, this.id).subscribe((res) => {

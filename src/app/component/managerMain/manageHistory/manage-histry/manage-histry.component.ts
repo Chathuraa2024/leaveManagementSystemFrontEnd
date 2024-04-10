@@ -68,4 +68,5 @@ export class ManageHistryComponent {
   Refresh() {
     this.getLeaveRequest();
   }
+
 }

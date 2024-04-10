@@ -24,7 +24,6 @@ export class DataChartComponent {
   @ViewChild('totalLeave',{ static: false }) totalLeaveCanvas?: ElementRef;
   constructor(private userAuthService:UserAuthService ,private leaveService: LeaveServiceService) {
   }
-
   ngAfterViewInit() {
     this.getUserName();
     this.getLeaveBalanceDetails(this.userName);
@@ -74,12 +73,10 @@ export class DataChartComponent {
     this.leaveService.getDetailByLeaveBalance(userName).subscribe(
       (res: any) => {
         this.leaveBalanceDetails = res.data;
-        console.log(this.leaveBalanceDetails)
         this.sickDays =  res.data.sickDays;
         this.annualDays = res.data.annualDays;
         this.casualDays = res.data.casualDays;
         this.totalDay = res.data.fullDays + res.data.halfDays/2
-        console.log(this.totalDay)
         this.barChart();
         this.doughnutChart()
       })

@@ -40,7 +40,6 @@ export class EmployeeComponent {
 
   setCurrentEmployeeId(id: number) {
     this.currentEmployeeId = id;
-    console.log(id)
   }
 
   clearCurrentEmployeeId() {
@@ -53,21 +52,16 @@ export class EmployeeComponent {
       }else{
         this.isRes = true;
         let j =0;
-        console.log(res.data)
         for(let i =0 ; i<= res.data.length;i++) {
           const startDateString = res.data[i].startDate;
           const startDate = new Date(startDateString);
           if (!this.isWithinRange(startDate, this.startDay, 45)) {
-            console.log(i)
             continue;
           }
           this.leaveEmployee[j] = res.data[i];
-
           j=j+1;
         }
-        console.log(this.leaveEmployee)
       }
-
     })
   }
   isWithinRange(startDate: Date, comparisonDate: Date, dayRange: number): boolean {
@@ -75,7 +69,6 @@ export class EmployeeComponent {
     const difference = Math.abs(comparisonDate.getTime() - startDate.getTime());
     return difference <= dayRange * dayInMilliseconds;
   }
-
 extractDateFromString(dateString: string): string | null {
     const regex = /^(\d{4}-\d{2}-\d{2})/;
     const match = dateString.match(regex);
@@ -84,17 +77,13 @@ extractDateFromString(dateString: string): string | null {
   descript(){
      this.isShow = true;
   }
-
-
   edit(id: number) {
     const url = `editLeave/${id}`
     this.router.navigate([url])
     this.reloadPage();
   }
-
   remove(id : number) {
     this.leaveService.deleteLeaveRequest(id).subscribe(req=>{
-      console.log(req);
       this.reloadPage()
       this.getLeaveDetails();
     })

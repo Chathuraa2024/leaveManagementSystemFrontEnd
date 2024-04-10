@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import {UserAuthService} from "../../../service/user-auth.service";
 import {ManagerService} from "../../../service/manager.service";
-import {FormControl, FormGroup, ɵValue} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeServiceService} from "../../../service/employee-service.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-employee-profile',
@@ -32,32 +33,33 @@ export class EmployeeProfileComponent {
 
   applyForm = new FormGroup({
     address: new FormControl(''),
-    contactNumber: new FormControl(''),
-    gitHub: new FormControl(''),
-    pemail:new FormControl(''),
+    contactNumber: new FormControl('',Validators.pattern('^[0-9]+$')),
+    gitHub: new FormControl('',Validators.pattern('^(https?://)?(www.)?github.com/.+$')),
+    pemail:new FormControl('',Validators.email),
     skype:new FormControl(''),
     status: new FormControl(''),
     newPassword: new FormControl(''),
-    conformPassword: new FormControl(''),
-    beFroPassword: new FormControl(''),
+    conformPassword: new FormControl('',Validators.minLength(8)),
+    beFroPassword: new FormControl('',Validators.minLength(8)),
   });
 
   ngOnInit(){
   this.getUsername();
   this.getEmployeeDetails();
   }
-  constructor(private userAuthService: UserAuthService , private managerService: ManagerService , private employeeService: EmployeeServiceService) {
+  constructor(private userAuthService: UserAuthService ,
+              private managerService: ManagerService ,
+              private employeeService: EmployeeServiceService,
+              private snackBar: MatSnackBar) {
   }
 
   getUsername(){
     this.username = this.userAuthService.getName();
-    console.log(this.username)
   }
 
   getEmployeeDetails(){
     this.managerService.getEmployeeById(this.username).subscribe((res)=>{
       this.employee = res.data;
-      console.log(this.employee)
       this.address = this.employee.address;
       this.contactNumber = this.employee.contactNumber;
       this.email= this.employee.email;
@@ -72,16 +74,12 @@ export class EmployeeProfileComponent {
       this.workSite= this.employee.workSite;
       this.workerRole= this.employee.workerRole;
 
-    },error => console.log(error))
-
+    })
   }
-
-
   submit() {
-    console.log(this.applyForm.value)
     const jsonData = JSON.stringify(this.applyForm.value);
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        console.log(res);
+        this.openSnackBar('update Successful')
     })
     }
 
@@ -92,11 +90,9 @@ export class EmployeeProfileComponent {
   changePassword() {
     this.isChangePa= true;
     if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '')){
-      console.log(this.applyForm.value)
       const jsonData = JSON.stringify(this.applyForm.value);
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        console.log(res);
-
+        this.openSnackBar('update Successful')
       })
       this.isChangePa = false;
     }
@@ -112,21 +108,17 @@ export class EmployeeProfileComponent {
       return false;
     }
     if(password1 != password){
-      console.log(password)
       return false;
     }
     if (password.length < minLength) {
       return false;
     }
-    // Check for uppercase letter
     if (!hasUpperCase.test(password)) {
       return false;
     }
-    // Check for lowercase letter
     if (!hasLowerCase.test(password)) {
       return false;
     }
-    // Check for digits
     if (!hasDigits.test(password)) {
       return false;
     }
@@ -140,16 +132,22 @@ export class EmployeeProfileComponent {
   }
 
   submitPasword() {
-    if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '')){
-      console.log(this.applyForm.value)
+    if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '') && (this.applyForm.valid)){
       const jsonData = JSON.stringify(this.applyForm.value);
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        console.log(res);
-
+        this.openSnackBar('update Successful')
       })
       this.isChangePa = false;
     }else {
       this.isValid=true
     }
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 }

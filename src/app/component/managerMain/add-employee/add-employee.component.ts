@@ -36,7 +36,6 @@ export class AddEmployeeComponent {
       const jsonData = JSON.stringify(this.applyForm.value);
       console.log(jsonData)
       this.managerService.addEmployee(jsonData).subscribe((res) => {
-          console.log(res);
           this.router.navigate(['/manageEmployee']);
         },
         (error) => {

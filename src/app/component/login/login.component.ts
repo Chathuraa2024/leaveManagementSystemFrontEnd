@@ -20,8 +20,6 @@ export class LoginComponent{
               private router: Router, private _snackBar: MatSnackBar  ) {
   }
 
-
-
   login(loginForm: NgForm){
     this.userName=loginForm.value.username;
     let isOpen : boolean = false;
