@@ -14,12 +14,11 @@ export class AddEmployeeComponent {
 
   applyForm = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    firstname: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl(''),
     email: new FormControl('@company.com', [Validators.required, Validators.email]),
     password: new FormControl('w3l1c0m3T8', [Validators.required, Validators.minLength(8)]),
     roles: new FormControl('', Validators.required),
-    status: new FormControl('', Validators.required),
     workerRole: new FormControl('', Validators.required),
     workSite: new FormControl('', Validators.required),
     currentProject: new FormControl(''),
@@ -33,6 +32,7 @@ export class AddEmployeeComponent {
 
   submitApplication(){
     if (this.applyForm.valid) {
+      console.log(this.applyForm.value)
       const jsonData = JSON.stringify(this.applyForm.value);
       console.log(jsonData)
       this.managerService.addEmployee(jsonData).subscribe((res) => {

@@ -19,6 +19,7 @@ export class ManagerDataChartComponent {
   public leaveCount: number = 0;
 
   @ViewChild('totalLeave', { static: false }) totalLeaveCanvas?: ElementRef;
+  date: string= new Date().toLocaleDateString();
 
   constructor(private dataSharingService: DataSharingServiceService ,
               private userAuthService: UserAuthService,

@@ -24,7 +24,7 @@ export class UpdateEmployeeComponent {
       workSite: new FormControl(this.employee ? this.employee.workSite : 'Not now work site'),
       workerRole: new FormControl(this.employee ? this.employee.workerRole : 'Not now worker role'),
       currentProject: new FormControl(this.employee ? this.employee.currentProject : 'Not now current project'),
-      password: new FormControl({value: 'w3l1c0m3T8', disabled: true}),
+      password: new FormControl({value: 'w3l1c0m3T84444', disabled: true}),
       status: new FormControl('true')
     });
   }
@@ -38,23 +38,29 @@ export class UpdateEmployeeComponent {
     this.activatedRoute.params.subscribe(params => {
       this.userName = params['userName'];
     });
+    console.log(this.userName)
     document.body.classList.add('dim-background');
     this.setEmployeeId(this.userName)
     this.initializeForm();
   }
   setEmployeeId(username:string){
-    this.employees =this.dataSharingService.getData();
-    for(let employee1 of this.employees){
-      if(employee1.userName === username){
-        this.employee = employee1
+    this.managerService.getAllEmployee().subscribe((res)=>{
+      this.employees=res.data;
+      for(let employee1 of this.employees){
+        if(employee1.userName === username){
+          this.employee = employee1
+        }
       }
-    }
+    });
+
   }
   submit(){
     const jsonData = JSON.stringify(this.applyForm.value);
+    console.log(jsonData)
     this.managerService.updateEmployee(jsonData, this.userName).subscribe(
       (res) => {
         this.router.navigate(['/manageEmployee']);
+        this.dataSharingService.setData(true)
       },
       (error) => {
         this.openSnackBar('Error . Please try again.');
@@ -72,5 +78,9 @@ export class UpdateEmployeeComponent {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/manageEmployee'])
   }
 }

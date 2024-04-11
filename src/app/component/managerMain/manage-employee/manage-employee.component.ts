@@ -8,9 +8,26 @@ import {DataSharingServiceService} from "../../../service/data-sharing-service.s
   styleUrl: './manage-employee.component.scss'
 })
 export class ManageEmployeeComponent {
-  constructor(private router:Router ) {
+  needRefresh: boolean = false;
+  isRefresh: boolean=false;
+  constructor(private router:Router,
+              private dataSharingService: DataSharingServiceService) {
+  }
+  ngOnInit(){
+    this.isRefresh = this.dataSharingService.getData()
+    this.refreshHtml()
   }
   addOne() {
     this.router.navigate(['/addEmployee'])
+  }
+
+  refreshHtml() {
+    if(this.isRefresh){
+      console.log(this.needRefresh)
+      this.needRefresh = true;
+      setTimeout(() => {
+        this.needRefresh = false;
+      });
+    }
   }
 }

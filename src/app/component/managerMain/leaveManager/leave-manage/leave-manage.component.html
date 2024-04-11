@@ -10,7 +10,6 @@
           <table class="table table-dark table-hover">
             <thead class="table-light">
             <tr>
-              <th>User Name</th>
               <th>Leave Type</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -22,7 +21,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let leave of leaves"   >
-              <td>{{leave.employeeId}}</td>
               <td>{{leave.leaveType}}</td>
               <td>{{extractDateFromString(leave.startDate)}}</td>
               <td>{{extractDateFromString(leave.endDate)}}</td>

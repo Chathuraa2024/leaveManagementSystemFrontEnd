@@ -68,7 +68,7 @@ export class LeaveManageComponent {
   }
 
   getDetails(leave1: any) {
-    const url = `/leaveDetails/${leave1}`
+    const url = `/updateEmployee/${leave1}`
       this.router.navigate([url])
   }
 

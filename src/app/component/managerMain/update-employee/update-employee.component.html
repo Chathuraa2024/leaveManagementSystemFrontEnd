@@ -86,8 +86,28 @@
                     <label for="status">status</label>
                     <input type="text" class="form-control" id="status" formControlName="status" name="status">
                   </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary" (click)="submit()" data-bs-dismiss="modal" >Update now</button>
+                  <div class="d-flex flex-row">
+                    <div class="col-6 text-center">
+                      <button type="submit" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#updateModal" data-bs-dismiss="modal" >Update now</button>
+                      <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h3 class="modal-title fs-5" id="updateModalLabel">Update {{employee.firstname}}</h3>
+                              <button  type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                            </div>
+                            <div class="modal-body text-center">
+                              <button (click)="submit()" class="btn btn-danger rounded">Are you sure</button>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 text-center">
+                      <button type="submit" class="btn btn-primary" (click)="goBack()" data-bs-dismiss="modal" >Go Back</button>
+                    </div>
                   </div>
                 </form>
               </div>

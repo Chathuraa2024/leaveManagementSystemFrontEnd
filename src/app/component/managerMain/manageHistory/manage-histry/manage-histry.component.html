@@ -10,10 +10,10 @@
           <form [formGroup]="applyForm" (ngSubmit)="search()">
             <div class="d-flex flex-row  align-items-center align-content-center justify-content-center">
                 <div class="form-group col-md-3">
-                  <input type="text" class="form-control" id="employeeId" formControlName="employeeId">
+                  <input type="text" class="form-control border-dark" id="employeeId" formControlName="employeeId">
                 </div>
-                <div class="form-group col-md-3">
-                  <select class="form-select form-select-lg" id="duration" formControlName="duration">
+                <div class="form-group col-md-3 ">
+                  <select class="form-select form-select-lg border-dark" id="duration" formControlName="duration">
                     <option selected>Select Leave Type</option>
                     <option value="Annual">Annual</option>
                     <option value="Casual">Casual</option>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-2">
                   <div class="form-group">
-                    <input type="date" class="form-control" id="startDate" formControlName="startDate">
+                    <input type="date" class="form-control border-dark" id="startDate" formControlName="startDate">
                   </div>
                 </div>
                 <div class=" text-center">
