@@ -38,6 +38,7 @@ export class ManagerComponent {
     this.leaveService.getLeaveRequest().subscribe((res)=>{
       if(!res || !res.data){
         this.isRes = false;
+        console.log(this.isRes)
       }else{
         let j =0;
         for(let i =0 ; i< res.data.length;i++) {

@@ -43,12 +43,12 @@ export class ManageHistryComponent {
   }
 
   search() {
-    let userName = this.applyForm.get('employeeId')?.value;
+    let firstName = this.applyForm.get('firstName')?.value;
     const leaveType = this.applyForm.get('duration')?.value;
     const startDate = this.applyForm.get('startDate')?.value;
     let filteredLeaves = this.leaves;
-    if (userName && ( userName != "Enter User Name")) {
-      filteredLeaves = filteredLeaves.filter((leave: any) => leave.employeeId === userName);
+    if (firstName && ( firstName != "Enter User Name")) {
+      filteredLeaves = filteredLeaves.filter((leave: any) => leave.firstname === firstName);
       if(filteredLeaves.size=0){
         filteredLeaves = this.leaves;
       }

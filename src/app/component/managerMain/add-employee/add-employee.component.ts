@@ -32,10 +32,15 @@ export class AddEmployeeComponent {
 
   submitApplication(){
     if (this.applyForm.valid) {
-      console.log(this.applyForm.value)
       const jsonData = JSON.stringify(this.applyForm.value);
-      console.log(jsonData)
       this.managerService.addEmployee(jsonData).subscribe((res) => {
+          const employee = res.data;
+          console.log(employee);
+          this.managerService.addEmployeeDataShare(employee);
+          this.applyForm.reset({
+            email: '@company.com',
+            password: 'w3l1c0m3T8'
+          });
           this.router.navigate(['/manageEmployee']);
         },
         (error) => {

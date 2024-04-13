@@ -15,19 +15,9 @@ export class ManageEmployeeComponent {
   }
   ngOnInit(){
     this.isRefresh = this.dataSharingService.getData()
-    this.refreshHtml()
   }
   addOne() {
     this.router.navigate(['/addEmployee'])
   }
 
-  refreshHtml() {
-    if(this.isRefresh){
-      console.log(this.needRefresh)
-      this.needRefresh = true;
-      setTimeout(() => {
-        this.needRefresh = false;
-      });
-    }
-  }
 }

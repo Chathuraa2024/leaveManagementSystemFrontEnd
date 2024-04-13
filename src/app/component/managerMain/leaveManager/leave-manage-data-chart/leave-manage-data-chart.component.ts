@@ -102,14 +102,14 @@ export class LeaveManageDataChartComponent {
       type: 'bar',
       data: {
         labels: [
-          'Software_Engineer',
-          'Quality_Assurance',
-          'UX_Designer',
-          'DevOps_Engineer',
-          'System_Administrator',
-          'Security_Analyst',
-          'Product_Manager',
-          'Business_Analyst'
+          'Software Engineer',
+          'Quality Assurance',
+          'UX Designer',
+          'DevOps Engineer',
+          'System Administrator',
+          'Security Analyst',
+          'Product Manager',
+          'Business Analyst'
         ],
         datasets: [{
           label: 'Employee',
@@ -169,28 +169,28 @@ export class LeaveManageDataChartComponent {
         for(let e of  this.empl){
           let role: string = e.workerRole
           switch (role) {
-            case 'Software_Engineer':
+            case 'Software Engineer':
               this.SE++;
               break;
-            case 'Quality_Assurance':
+            case 'Quality Assurance (QA) Engineer':
               this.QA++;
               break;
-            case 'UX_Designer':
+            case 'UI/UX Designer':
               this.UD++;
               break;
-            case 'DevOps_Engineer':
+            case 'DevOps Engineer':
               this.DE++;
               break
-            case 'System_Administrator':
+            case 'System Administrator':
               this.SA++;
               break;
-            case 'Security_Analyst':
+            case 'Security Analyst':
               this.SAT++;
               break;
-            case 'Product_Manager':
+            case 'Product Manager':
               this.PM++;
               break;
-            case 'Business_Analyst':
+            case 'Business Analyst':
               this.BA++;
               break
           }
@@ -204,28 +204,28 @@ export class LeaveManageDataChartComponent {
         if(t===e.userName){
           let role: string = e.workerRole
           switch (role) {
-            case 'Software_Engineer':
+            case 'Software Engineer':
               this.SE--;
               break;
-            case 'Quality_Assurance':
+            case 'Quality Assurance (QA) Engineer':
               this.QA--;
               break;
-            case 'UX_Designer':
+            case 'UI/UX Designer':
               this.UD--;
               break;
-            case 'DevOps_Engineer':
+            case 'DevOps Engineer':
               this.DE--;
               break
-            case 'System_Administrator':
+            case 'System Administrator':
               this.SA--;
               break;
-            case 'Security_Analyst':
+            case 'Security Analyst':
               this.SAT--;
               break;
-            case 'Product_Manager':
+            case 'Product Manager':
               this.PM--;
               break;
-            case 'Business_Analyst':
+            case 'Business Analyst':
               this.BA--;
               break
           }}}}

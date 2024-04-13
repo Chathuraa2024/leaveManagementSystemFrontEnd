@@ -18,14 +18,15 @@ export class DeleteEmployeeComponent {
   }
   ngOnInit(){
     this.Name = this.dataSharingService.getData();
+
   }
-  delete(id: string){
-    this.managerService.deleteEmployee(id).subscribe(data=>{console.log(data);
+  onDelete(id: string){
+    this.managerService.deleteEmployee(id).subscribe(()=>{
+      this.managerService.triggerEmployeeDelete();
       this.isDelete.emit(false);
     })
   }
   cancel() {
-    console.log("delete is cancel")
     this.isDelete.emit(false);
   }
 }
