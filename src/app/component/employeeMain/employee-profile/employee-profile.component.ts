@@ -4,6 +4,7 @@ import {ManagerService} from "../../../service/manager.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeServiceService} from "../../../service/employee-service.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-employee-profile',
@@ -50,7 +51,7 @@ export class EmployeeProfileComponent {
   constructor(private userAuthService: UserAuthService ,
               private managerService: ManagerService ,
               private employeeService: EmployeeServiceService,
-              private snackBar: MatSnackBar) {
+              private toastr: ToastrService) {
   }
 
   getUsername(){
@@ -134,8 +135,9 @@ export class EmployeeProfileComponent {
   submitPasword() {
     if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '') && (this.applyForm.valid)){
       const jsonData = JSON.stringify(this.applyForm.value);
+      console.log(jsonData)
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        this.openSnackBar('update Successful')
+        this.toastr.success('Password updated Successfully','Update Password')
       })
       this.isChangePa = false;
     }else {
@@ -143,11 +145,4 @@ export class EmployeeProfileComponent {
     }
   }
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
-  }
 }

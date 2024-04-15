@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {UserAuthService} from "../../../service/user-auth.service";
 import {LeaveServiceService} from "../../../service/leave-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-edit-employee-leave',
@@ -33,7 +34,8 @@ export class EditEmployeeLeaveComponent {
 
   constructor( private activatedRoute: ActivatedRoute ,
                private leaveService: LeaveServiceService,
-               private router: Router) {
+               private router: Router,
+               private toastr: ToastrService ) {
   }
 
 
@@ -56,13 +58,18 @@ export class EditEmployeeLeaveComponent {
   }
   submitApplication() {
     const jsonData = JSON.stringify(this.applyForm.value);
-    console.log(jsonData)
     this.leaveService.editLeave(jsonData, this.id).subscribe((res) => {
-        console.log(res);
+        const newEmp = res.data;
+        for(let emp of this.leaveService.leaveEmployee){
+          if(emp.id === this.id){
+            Object.assign(emp, newEmp);
+          }
+        }
+        this.toastr.success(res.massage,"Leave Edit")
         this.router.navigate(['/leaveAdding']);
       },
       (error) => {
-        console.log(error) })
+        this.toastr.error('Failed to edit leave due to internal error','500') })
   }
 
 }

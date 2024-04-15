@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody *ngIf="!isSearch">
-        <tr *ngFor="let employee of employees" >
+        <tr *ngFor="let employee of managerService.employees" >
           <td>{{employee.firstname}}</td>
           <td>{{employee.lastName}}</td>
           <td>{{employee.workerRole}}</td>
@@ -40,10 +40,10 @@
           <td>{{employee.email}}</td>
           <td>{{employee.contactNumber}}</td>
           <td>
-            <button class="btn-primary" (click)="updateEmployee(employee.userName)">UPDATE</button>
+            <button class="btn btn-primary" (click)="updateEmployee(employee.userName)">UPDATE</button>
           </td>
           <td>
-            <button class="btn-primary" (click)="delete(employee.userName,employee.firstname)">DELETE</button>
+            <button class="btn btn-danger" (click)="delete(employee.userName,employee.firstname)">DELETE</button>
           </td>
         </tr>
         </tbody>

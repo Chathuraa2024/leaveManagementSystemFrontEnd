@@ -10,14 +10,9 @@ import {DataSharingServiceService} from "../../../service/data-sharing-service.s
 export class ManageEmployeeComponent {
   needRefresh: boolean = false;
   isRefresh: boolean=false;
-  constructor(private router:Router,
-              private dataSharingService: DataSharingServiceService) {
-  }
-  ngOnInit(){
-    this.isRefresh = this.dataSharingService.getData()
+  constructor(private router:Router) {
   }
   addOne() {
     this.router.navigate(['/addEmployee'])
   }
-
 }

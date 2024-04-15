@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LeaveServiceService} from "../../../service/leave-service.service";
 import {Router} from "@angular/router";
 import {UserAuthService} from "../../../service/user-auth.service";
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-leave-adding',
@@ -17,20 +18,20 @@ export class LeaveAddingComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   applyForm = new FormGroup({
-    employeeId: new FormControl(''),
-    leaveType: new FormControl(''),
-    startDate: new FormControl(''),
-    endDate: new FormControl(''),
-    halfType: new FormControl(''),
+    employeeId: new FormControl(),
+    leaveType: new FormControl('',[Validators.required]),
+    startDate: new FormControl('',[Validators.required]),
+    endDate: new FormControl('',),
+    halfType: new FormControl('',[Validators.required]),
     description: new FormControl(''),
-    duration: new FormControl(''),
+    duration: new FormControl('',[Validators.required]),
   });
   Duration: any = this.applyForm.value.duration;
   constructor(
     private leaveService:LeaveServiceService,
     private router: Router,
     private userAuthService : UserAuthService,
-    private _snackBar: MatSnackBar) {
+    private toastr: ToastrService) {
   }
 
   ngOnInit(){
@@ -39,24 +40,24 @@ export class LeaveAddingComponent {
 
 
   submitApplication(){
+    this.applyForm.patchValue({employeeId: this.userName});
     const jsonData = JSON.stringify(this.applyForm.value);
+    console.log(jsonData)
     this.leaveService.addLeave(jsonData).subscribe((res) => {
-        if(res){
-          this.openSnackBar("is Leave Add",res.data)
-          const url = `/employee/${this.userName}`
-          this.router.navigate([url]);
+        if(res.code == 200){
+          const leave = res.data;
+          this.leaveService.leaveEmployee.push(leave)
+          this.toastr.success(res.massage,res.code)
+        }else{
+          this.toastr.warning(res.massage,res.data)
         }
       },
       (error) => {
-        this.openSnackBar("leave Subbmition fial","can you try")
+      this.toastr.error('leave Submition fial', )
     })
   }
   getUserName(){
     this.userName = this.userAuthService.getName()
-  }
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action,{horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,});
   }
 
 }

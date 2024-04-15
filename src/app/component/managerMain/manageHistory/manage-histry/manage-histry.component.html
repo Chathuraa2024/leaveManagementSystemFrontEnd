@@ -51,8 +51,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let leave of leaves"   >
-              <td>{{leave.firstName}}</td>
+            <tr *ngFor="let leave of leaveService.leaves "   >
+              <td>{{leave.firstname}}</td>
               <td>{{leave.leaveType}}</td>
               <td>{{extractDateFromString(leave.startDate)}}</td>
               <td>{{extractDateFromString(leave.endDate)}}</td>

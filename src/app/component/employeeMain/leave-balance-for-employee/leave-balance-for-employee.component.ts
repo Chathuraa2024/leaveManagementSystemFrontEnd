@@ -15,6 +15,7 @@ export class LeaveBalanceForEmployeeComponent {
   userName: string = '';
   totalLeave: any = 0;
   @Input() dashBord: boolean = false;
+  date: string= new Date().toLocaleDateString();
   ngOnInit() {
     this.getUsername();
     this.getLeaveBalanceDetails(this.userName);

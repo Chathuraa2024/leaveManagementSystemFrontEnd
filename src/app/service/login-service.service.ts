@@ -23,7 +23,7 @@ export class LoginServiceService {
   public  roleEqual(allowRoles): boolean {
     let isMatch = false;
     const userRoles: any = this.userAuthService.getRoles();
-    if (userRoles != null && userRoles) {
+    if (userRoles != null && userRoles.length > 0) {
         if (allowRoles === userRoles[0].roleDescription) {
           isMatch = true;
           return isMatch;
@@ -32,6 +32,7 @@ export class LoginServiceService {
         }
     }
   }
+
   public UserName(userName: string){
     this.userName = userName;
     return this.userName;

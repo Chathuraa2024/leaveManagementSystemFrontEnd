@@ -58,7 +58,13 @@ export class UpdateEmployeeComponent {
     const jsonData = JSON.stringify(this.applyForm.value);
     console.log(jsonData)
     this.managerService.updateEmployee(jsonData, this.userName).subscribe(
-      (res) => {
+      (res:any) => {
+        const newEmp = res.data;
+        for(let emp of this.managerService.employees){
+          if(emp.userName === this.userName){
+            Object.assign(emp, newEmp);
+          }
+        }
         this.router.navigate(['/manageEmployee']);
         this.dataSharingService.setData(true)
       },

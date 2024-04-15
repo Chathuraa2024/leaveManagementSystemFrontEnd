@@ -1,9 +1,4 @@
 
-<div class="d-flex flex-row view" style=" height: auto">
-  <div class="sideBar" style="width:15%;">
-    <app-side-bar ></app-side-bar>
-  </div>
-  <div class="d-flex flex-column mx-5" style="width: 75%">
     <div class="row">
       <app-leave-balance-for-employee></app-leave-balance-for-employee>
     </div>
@@ -17,10 +12,6 @@
             <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="employeeId">User Name</label>
-                    <input type="text" class="form-control" id="employeeId" formControlName="employeeId">
-                  </div>
                   <div class="form-group">
                     <label for="leaveType">Leave Type</label>
                     <select class="form-select form-select-lg mb-3" id="leaveType" formControlName="leaveType">
@@ -69,7 +60,7 @@
                 </div>
               </div>
               <div class="mb-3 p-4 text-center">
-                <button type="submit" class="btn btn-primary">Apply Now</button>
+                <button [disabled]="applyForm.invalid" type="submit" class="btn btn-outline-primary form-control rounded-5 w-50 mx-auto">Apply Now</button>
               </div>
             </form>
           </div>
@@ -92,7 +83,7 @@
         </div>
       </div>
     </div>
-  </div>
+
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -108,4 +99,4 @@
       </div>
     </div>
   </div>
-</div>
+

@@ -10,7 +10,8 @@ export class LeaveServiceService {
   BASE_URL2 = "http://localhost:8080/api/v1/manager-control";
   BASE_URL3 = "http://localhost:8080/api/v1/leave-balance";
   constructor(private http: HttpClient ) { }
-
+  leaves: any = [];
+  leaveEmployee: any=[]
   getLeaveRequest() : Observable<any> {
     const url = `${this.BASE_URL1}/get-all-leave`;
     return this.http.get(url)
@@ -63,7 +64,7 @@ export class LeaveServiceService {
     const url = `${this.BASE_URL1}/count-by-leave-per-day/${date}`
     return this.http.get(url);
   }
-  editLeave(jsonData: string, id: number) {
+  editLeave(jsonData: string, id: number): Observable<any> {
     const url = `${this.BASE_URL1}/edit-leave/${id}`
     return this.http.put(url,jsonData);
   }

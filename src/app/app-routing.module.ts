@@ -16,6 +16,7 @@ import {EmployeeProfileComponent} from "./component/employeeMain/employee-profil
 import {LeaveHistoryComponent} from "./component/employeeMain/leave-history/leave-history.component";
 import {CalendarComponent} from "./component/calendar/calendar.component";
 import {ManageHistryComponent} from "./component/managerMain/manageHistory/manage-histry/manage-histry.component";
+import {DeleteEmployeeComponent} from "./component/managerMain/delete-employee/delete-employee.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -32,8 +33,8 @@ const routes: Routes = [
   {path: 'employeeProfile', component: EmployeeProfileComponent,canActivate: [authGuard], data:{roles:['EMPLOYEE']}},
   {path: 'leaveHistory' , component: LeaveHistoryComponent,canActivate: [authGuard], data:{roles:['EMPLOYEE']}},
   {path: 'calendar' , component:CalendarComponent},
-  {path:'manageLeaveHistory', component:ManageHistryComponent,canActivate: [authGuard], data:{roles:['MANAGER']}}
-
+  {path:'manageLeaveHistory', component:ManageHistryComponent,canActivate: [authGuard], data:{roles:['MANAGER']}},
+  {path: 'deleteEmployee/:userName', component:DeleteEmployeeComponent}
 
 ];
 

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManagerService {
-
+  employees:any=[]
   BASE_URL = "http://localhost:8080/api/v1/manager-control";
   requestHeader = new HttpHeaders(
     {"No-Auth":"True"}
   );
-  constructor(private http: HttpClient ) { }
+
+  constructor(private http: HttpClient ) {
+  }
 
   public getAllEmployee(): Observable<any>{
     const url = `${this.BASE_URL}/viewAll`;

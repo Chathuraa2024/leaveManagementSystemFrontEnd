@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -46,7 +45,12 @@ import { ManageHistryComponent } from './component/managerMain/manageHistory/man
 import { ManagerDataChartComponent } from './component/managerMain/managerDashBoard/manager-data-chart/manager-data-chart.component';
 import { LeaveManageDataChartComponent } from './component/managerMain/leaveManager/leave-manage-data-chart/leave-manage-data-chart.component';
 import { HistoryDataChartComponent } from './component/managerMain/manageHistory/history-data-chart/history-data-chart.component';
-
+import { DeleteEmployeeComponent } from './component/managerMain/delete-employee/delete-employee.component';
+import { ConfirmationDialogComponentComponent } from './component/managerMain/confirmation-dialog-component/confirmation-dialog-component.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Needed for animations
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr'
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +77,8 @@ import { HistoryDataChartComponent } from './component/managerMain/manageHistory
     ManagerDataChartComponent,
     LeaveManageDataChartComponent,
     HistoryDataChartComponent,
+    DeleteEmployeeComponent,
+    ConfirmationDialogComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +99,14 @@ import { HistoryDataChartComponent } from './component/managerMain/manageHistory
     MatInputModule,
     MatNativeDateModule,
     FullCalendarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     authGuard,

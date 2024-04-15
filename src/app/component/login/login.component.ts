@@ -3,7 +3,8 @@ import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {LoginServiceService} from "../../service/login-service.service";
 import {UserAuthService} from "../../service/user-auth.service";
 import {Router} from "@angular/router";
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent{
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private loginService:LoginServiceService, private userAuthService: UserAuthService ,
-              private router: Router, private _snackBar: MatSnackBar  ) {
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   login(loginForm: NgForm){
@@ -34,22 +36,18 @@ export class LoginComponent{
             isOpen = true;
             const url = `/manager/${loginForm.value.username}`
             this.router.navigate([url])
+            this.toastr.success('Welcome back! '+loginForm.value.username,'Login successful!')
           }else{
             isOpen = false;
-            console.log("employeee loging")
             const url = `/employee/${loginForm.value.username}`
             this.router.navigate([url])
+            this.toastr.success('Welcome back! '+loginForm.value.username,'Login successful!')
           }
         },
         error => {
-          this.openSnackBar('Invalid user name or Password',error)
+          this.toastr.error(' Please check your username and password and try again.', 'Login failed!');
         })
     return isOpen;
   }
 
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action,{horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,});
-  }
 }

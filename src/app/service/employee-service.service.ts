@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,8 @@ import {Observable} from "rxjs";
 export class EmployeeServiceService {
   BASE_URL1 = "http://localhost:8080/api/v1/employee-manage";
   constructor(private http: HttpClient ) { }
+
+
 
   updateEmployee(jsonData: any,username:string) : Observable<any> {
     const url = `${this.BASE_URL1}/update-employee/${username}`;

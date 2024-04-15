@@ -5,6 +5,7 @@ import {UpdateEmployeeComponent} from "../update-employee/update-employee.compon
 import {Router} from "@angular/router";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
 import {Subscription} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-get-all-employee',
@@ -12,28 +13,19 @@ import {Subscription} from "rxjs";
   styleUrl: './get-all-employee.component.scss',
 })
 export class GetAllEmployeeComponent implements OnInit {
-  employees: any = [];
   employee: any=[];
   isSearch: boolean = false;
   page: number=0;
   @Input() needRefresh: boolean=false;
   isDelete: boolean=false;
-  // subscription: Subscription;
   private id?: string;
-  constructor(private managerService: ManagerService ,
-              private router : Router , private dataSharingService:DataSharingServiceService) {
+  constructor(public managerService: ManagerService ,
+              private router : Router , private dataSharingService:DataSharingServiceService,
+              private toastr: ToastrService) {
   }
   ngOnInit(){
     this.pagination(this.page)
     this.isDelete =false;
-    this.managerService.employees$.subscribe((employee) =>
-    {this.employees = [...this.employees, ...employee];
-    });
-     this.managerService.employeeDeleted$.subscribe( () => {
-      console.log('Employee deleted, pagination triggered');
-       this.employees = this.employees.filter((employee: any) => employee.userName !== this.id);
-       console.log(this.employees)
-    });
   }
   delete(id: string,firstName:string){
     this.id = id;
@@ -41,20 +33,29 @@ export class GetAllEmployeeComponent implements OnInit {
     this.isDelete =true
   }
   updateEmployee(userName: string){
-    this.dataSharingService.setData(this.employees);
+    this.dataSharingService.setData(this.managerService.employees);
     const url = `/updateEmployee/${userName}`
     this.router.navigate([url])
   }
   search(firstName: string) {
-    this.isSearch= true
     try {
-      for( const emp of this.employees){
-        if(emp.firstname == firstName){
-          this.employee.push(emp)
+      if (firstName) {
+        this.isSearch=true
+        for (const emp of this.managerService.employees) {
+          if (emp.firstname === firstName) {
+            this.employee.push(emp)
+          }else{
+            this.isSearch=false
+            this.pagination(this.page);
+            this.toastr.warning('Please check the entered details and try again.',firstName+' Employee not found')
+          }
         }
+      } else {
+        this.isSearch=false
+        this.pagination(this.page);
       }
-    }catch (error){
-      console.error("Error finding employee:", error);
+    }catch (error: any){
+      this.toastr.error('Error finding employee', error)
     }
   }
   movePage(isNext: boolean) {
@@ -72,14 +73,12 @@ export class GetAllEmployeeComponent implements OnInit {
     const size = 10;
     this.managerService.getAllEmployeePagination(page, size).subscribe(
       (res) => {
-        this.employees = res.data.employees;
-
+        this.managerService.employees = res.data.employees;
       },
       (error) => {
-        console.error('Error fetching employees:', error);
+        this.toastr.error('Service unavailable. Please check back later','503')
       }
     );
-    return this.employees;
   }
   changeStatus($event: boolean) {
     this.isDelete = $event

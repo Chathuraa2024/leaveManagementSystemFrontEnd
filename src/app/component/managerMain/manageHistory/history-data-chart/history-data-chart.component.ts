@@ -82,45 +82,47 @@ export class HistoryDataChartComponent {
       (res) => {
         this.empl = res.data;
         for(let e of  this.empl){
-          let month: number | null = this.extractMonthFromString(e.startDate)
-          switch (month) {
-            case 1:
-              this.JN++;
-              break;
-            case 2:
-              this.FE++;
-              break;
-            case 3:
-              this.MA++;
-              break;
-            case 4:
-              this.APR++;
-              break
-            case 5:
-              this.MAY++;
-              break;
-            case 6:
-              this.JUN++;
-              break;
-            case 7:
-              this.JUL++;
-              break;
-            case 8:
-              this.AUG++;
-              break;
-            case 9:
-              this.SEP++;
-              break;
+          if (e.accept === "ACCEPT"){
+            let month: number | null = this.extractMonthFromString(e.startDate)
+            switch (month) {
+              case 1:
+                this.JN++;
+                break;
+              case 2:
+                this.FE++;
+                break;
+              case 3:
+                this.MA++;
+                break;
+              case 4:
+                this.APR++;
+                break
+              case 5:
+                this.MAY++;
+                break;
+              case 6:
+                this.JUN++;
+                break;
+              case 7:
+                this.JUL++;
+                break;
+              case 8:
+                this.AUG++;
+                break;
+              case 9:
+                this.SEP++;
+                break;
               case 10:
-              this.OCT++;
-              break
+                this.OCT++;
+                break
               case 11:
-              this.NOV++;
-              break
+                this.NOV++;
+                break
               case 12:
-              this.DEC++;
-              break
+                this.DEC++;
+                break
 
+            }
           }
         }
         this.lineChart()

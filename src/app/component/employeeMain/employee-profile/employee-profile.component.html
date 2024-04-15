@@ -1,8 +1,4 @@
-<div class="d-flex flex-row view" style=" height: auto">
-  <div class="sideBar" style="width:15%;">
-    <app-side-bar></app-side-bar>
-  </div>
-  <div class="container" style="width: 85%">
+
     <div class="main-body">
       <div class="d-flex flex-row">
         <div class="col-lg-4 w-50">
@@ -118,7 +114,7 @@
                           <form [formGroup]="applyForm" >
                             <div class="form-group d-flex flex-column mb-3">
                               <div class="col-sm-5">
-                                <label for="beFroPassword" class="mb-0" >Be for Password</label>
+                                <label for="beFroPassword" class="mb-0" >Previous Password</label>
                               </div>
                               <div class="col-sm-9 text-secondary ">
                                 <input type="password" class="form-control" id="beFroPassword" formControlName="beFroPassword" name="beFroPassword">
@@ -144,7 +140,7 @@
                             </div>
                             <div class="form-group d-flex flex-column mb-3">
                               <div class="col-sm-5">
-                                <label for="conformPassword">Conform Password </label>
+                                <label for="conformPassword">Confirm Password </label>
                               </div>
                               <div class="col-sm-9 text-secondary disabled ">
                                 <input type="password" class="form-control" id="conformPassword" formControlName="conformPassword" name="conformPassword">
@@ -162,7 +158,6 @@
                           </form>
                         </div>
                       </div>
-
                     </ul>
                   </div>
                 </div>
@@ -214,5 +209,3 @@
         </div>
       </div>
     </div>
-  </div>
-</div>

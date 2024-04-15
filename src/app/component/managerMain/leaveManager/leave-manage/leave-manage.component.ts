@@ -2,16 +2,15 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LeaveServiceService} from "../../../../service/leave-service.service";
 import {DataSharingServiceService} from "../../../../service/data-sharing-service.service";
-import {EMPTY, Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponentComponent} from "../../confirmation-dialog-component/confirmation-dialog-component.component"
+import {ToastrService} from "ngx-toastr";
 @Component({
   selector: 'app-leave-manage',
   templateUrl: './leave-manage.component.html',
   styleUrl: './leave-manage.component.scss'
 })
 export class LeaveManageComponent {
-  leaves: any = [];
   tlLeaves: any=[];
   tdLeaves : any[] = [];
   isTrue: boolean = false;
@@ -19,41 +18,40 @@ export class LeaveManageComponent {
   id: number = 0;
   currentView: string = 'default';
   isdate:boolean=false;
-  constructor(private leaveService : LeaveServiceService ,
+  constructor(public leaveService : LeaveServiceService ,
               private router : Router,
               private dataSharingService:DataSharingServiceService,
               public dialog: MatDialog,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private toastr: ToastrService) {
   }
   ngOnInit(){
     this.activatedRoute.queryParams.subscribe(params => {
-      this.currentView = params['view'] || 'default'; // Check for query param
+      this.currentView = params['view'] || 'default';
     });
     this.id = this.dataSharingService.getData();
     this.getLeaveRequest(this.id);
   }
-  reloadPage(): void {
-    window.location.reload();
-  }
   getLeaveRequest(id: number){
       this.leaveService.getLeaveRequest().subscribe(
         (res)=> {
+          this.leaveService.leaves=[]
           console.log(res.data)
           let j =0
           if(id != undefined){
             for(let i =0 ;i< res.data.length;i++){
               if(res.data[i].id === id){
-                this.leaves[0] = res.data[i];
+                this.leaveService.leaves[0] = res.data[i];
               }
             }
           }else{
             for(let i =0 ;i< res.data.length;i++) {
               if (res.data[i].accept === "NOT_LOOK") {
-                this.leaves[j] = res.data[i];
+                this.leaveService.leaves[j] = res.data[i];
                 j = j + 1
               }}}
         },error => {
-          console.log(error)
+          this.toastr.error('Error finding Leave',error)
         }
       )
   }
@@ -65,21 +63,20 @@ export class LeaveManageComponent {
   }
 
   Submit(i: boolean , id: number){
-    if(i){
-      this.leaveService.putAcceptRequest(i,id).subscribe(req=>{
+      this.leaveService.putAcceptRequest(i,id).subscribe(res=>{
+        const newLeave = res.data;
+        for(let lev of this.leaveService.leaves){
+          if(lev.id === id){
+            Object.assign(lev, newLeave);
+          }
+        }
       })
-    }else {
-      this.leaveService.putAcceptRequest(i,id).subscribe(req=> {
-        this.router.navigate(["/leaveManage"])
-      })
-    }
   }
   confirmSubmission(accept: boolean, leaveId: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponentComponent, {
-      width: '450px', position: { left:'550px' }, height: '100px',
-      data: { accept: accept, leaveId: leaveId } // Optionally pass any data you need
+      width: '450px', height: '100px',
+      data: { accept: accept, leaveId: leaveId }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.Submit(accept, leaveId);
@@ -87,7 +84,6 @@ export class LeaveManageComponent {
       }
     });
   }
-
   getDetails(leave1: any) {
     const url = `/updateEmployee/${leave1}`
       this.router.navigate([url])

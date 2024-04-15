@@ -1,6 +1,7 @@
 import {Component, SimpleChanges} from '@angular/core';
 import {LeaveServiceService} from "../../../service/leave-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -9,8 +10,6 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './employee.component.scss'
 })
 export class EmployeeComponent {
-
-  leaveEmployee: any = [];
   userName: string = '';
   isShow: boolean = false;
   duration: any = "ACCEPT";
@@ -32,10 +31,10 @@ export class EmployeeComponent {
     });
     this.getLeaveDetails();
   }
-  constructor(private leaveService : LeaveServiceService, private activatedRoute : ActivatedRoute,private router: Router, ) {
-  }
-  reloadPage(): void {
-    window.location.reload();
+  constructor(public leaveService : LeaveServiceService,
+              private activatedRoute : ActivatedRoute,
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   setCurrentEmployeeId(id: number) {
@@ -46,6 +45,7 @@ export class EmployeeComponent {
     this.currentEmployeeId = 0;
   }
   getLeaveDetails(){
+    this.leaveService.leaveEmployee =[];
     this.leaveService.getAllLeaveByUserName(this.userName).subscribe((res)=>{
       if(!res || !res.data || !Array.isArray(res.data) || res.data.length === 0){
         this.isRes = false;
@@ -58,7 +58,7 @@ export class EmployeeComponent {
           if (!this.isWithinRange(startDate, this.startDay, 45)) {
             continue;
           }
-          this.leaveEmployee[j] = res.data[i];
+          this.leaveService.leaveEmployee[j] = res.data[i];
           j=j+1;
         }
       }
@@ -80,12 +80,11 @@ extractDateFromString(dateString: string): string | null {
   edit(id: number) {
     const url = `editLeave/${id}`
     this.router.navigate([url])
-    this.reloadPage();
   }
   remove(id : number) {
     this.leaveService.deleteLeaveRequest(id).subscribe(req=>{
-      this.reloadPage()
-      this.getLeaveDetails();
+      this.toastr.success('Your Leave Request has been successfully deleted',"Leave Request Successfully Deleted")
+      this.leaveService.leaveEmployee = this.leaveService.leaveEmployee.filter((emp: any) => emp.id !== id);
     })
   }
 }

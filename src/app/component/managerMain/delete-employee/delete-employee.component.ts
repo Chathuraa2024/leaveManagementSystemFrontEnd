@@ -22,8 +22,8 @@ export class DeleteEmployeeComponent {
   }
   onDelete(id: string){
     this.managerService.deleteEmployee(id).subscribe(()=>{
-      this.managerService.triggerEmployeeDelete();
       this.isDelete.emit(false);
+      this.managerService.employees = this.managerService.employees.filter((emp: any) => emp.userName !== id);
     })
   }
   cancel() {
