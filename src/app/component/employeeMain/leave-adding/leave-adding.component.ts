@@ -21,8 +21,8 @@ export class LeaveAddingComponent {
     employeeId: new FormControl(),
     leaveType: new FormControl('',[Validators.required]),
     startDate: new FormControl('',[Validators.required]),
-    endDate: new FormControl('',),
-    halfType: new FormControl('',[Validators.required]),
+    endDate: new FormControl(''),
+    halfType: new FormControl(''),
     description: new FormControl(''),
     duration: new FormControl('',[Validators.required]),
   });
@@ -47,17 +47,25 @@ export class LeaveAddingComponent {
         if(res.code == 200){
           const leave = res.data;
           this.leaveService.leaveEmployee.push(leave)
+          console.log(this.leaveService.leaveEmployee)
           this.toastr.success(res.massage,res.code)
+          this.applyForm.reset();
+          const url = `/employee/${this.userName}`
+          this.router.navigate([url])
         }else{
           this.toastr.warning(res.massage,res.data)
         }
       },
       (error) => {
-      this.toastr.error('leave Submition fial', )
+      this.toastr.error('you always add leave these days','leave Submission fails!' )
     })
   }
   getUserName(){
     this.userName = this.userAuthService.getName()
   }
 
+  isApplyButtonDisabled(formData: any) {
+    return (formData.duration === 'Full' && !formData.endDate) ||
+      (formData.duration === 'Half' && !formData.halfType);
+  }
 }

@@ -50,7 +50,8 @@ import { ConfirmationDialogComponentComponent } from './component/managerMain/co
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Needed for animations
 import { CommonModule } from '@angular/common';
-import { ToastrModule } from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,

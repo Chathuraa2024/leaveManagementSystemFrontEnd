@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ManagerService} from "../../../service/manager.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -32,13 +32,12 @@ export class UpdateEmployeeComponent {
               private router: Router ,
               private activatedRoute:ActivatedRoute ,
               private dataSharingService:DataSharingServiceService,
-              private snackBar: MatSnackBar) {
+              private toastr: ToastrService) {
   }
   ngOnInit(){
     this.activatedRoute.params.subscribe(params => {
       this.userName = params['userName'];
     });
-    console.log(this.userName)
     document.body.classList.add('dim-background');
     this.setEmployeeId(this.userName)
     this.initializeForm();
@@ -48,15 +47,12 @@ export class UpdateEmployeeComponent {
       this.employees=res.data;
       for(let employee1 of this.employees){
         if(employee1.userName === username){
-          this.employee = employee1
-        }
-      }
+          this.employee = employee1}}
+      this.isGender();
     });
-
   }
   submit(){
     const jsonData = JSON.stringify(this.applyForm.value);
-    console.log(jsonData)
     this.managerService.updateEmployee(jsonData, this.userName).subscribe(
       (res:any) => {
         const newEmp = res.data;
@@ -65,27 +61,19 @@ export class UpdateEmployeeComponent {
             Object.assign(emp, newEmp);
           }
         }
+        this.toastr.success('Success to update employee','Update '+this.userName)
         this.router.navigate(['/manageEmployee']);
         this.dataSharingService.setData(true)
       },
       (error) => {
-        this.openSnackBar('Error . Please try again.');
-      }
-    )
+        this.toastr.error('Please try again',error)
+      })
   }
   isGender(): void {
     if(this.employee.gender == "Female"){
       this.isMale = false;
     }
   }
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
-  }
-
   goBack() {
     this.router.navigate(['/manageEmployee'])
   }

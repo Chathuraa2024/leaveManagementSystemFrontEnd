@@ -14,4 +14,7 @@ export class DataSharingServiceService {
   }
   getData() {
     return this.data
-  }}
+  }
+
+
+}

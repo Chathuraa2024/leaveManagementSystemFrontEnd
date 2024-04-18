@@ -58,7 +58,7 @@ export class EmployeeComponent {
           if (!this.isWithinRange(startDate, this.startDay, 45)) {
             continue;
           }
-          this.leaveService.leaveEmployee[j] = res.data[i];
+          this.leaveService.leaveEmployeeHome[j] = res.data[i];
           j=j+1;
         }
       }
@@ -84,7 +84,7 @@ extractDateFromString(dateString: string): string | null {
   remove(id : number) {
     this.leaveService.deleteLeaveRequest(id).subscribe(req=>{
       this.toastr.success('Your Leave Request has been successfully deleted',"Leave Request Successfully Deleted")
-      this.leaveService.leaveEmployee = this.leaveService.leaveEmployee.filter((emp: any) => emp.id !== id);
+      this.leaveService.leaveEmployeeHome = this.leaveService.leaveEmployeeHome.filter((emp: any) => emp.id !== id);
     })
   }
 }

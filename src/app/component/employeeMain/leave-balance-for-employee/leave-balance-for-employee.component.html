@@ -7,20 +7,20 @@
   </div>
   <div class="main1 card text-center">
     <div class="card-body " >
-      <p>Total Annual Leave = {{14-leaveBalanceDetails.annualDays}}</p>
-      <p>Remaining Leave = {{leaveBalanceDetails.annualDays}}</p>
+      <p>Total Annual Leave = {{14-(leaveBalanceDetails?.annualDays || 0)}}</p>
+      <p>Remaining Leave = {{(leaveBalanceDetails?.annualDays || 0)}}</p>
     </div>
   </div>
   <div class="main1 card text-center">
     <div class="card-body ">
-      <p>Casual Leave = {{7- leaveBalanceDetails.casualDays}}</p>
-      <p>Remaining Leave = {{leaveBalanceDetails.casualDays}}</p>
+      <p>Casual Leave = {{7- (leaveBalanceDetails?.casualDays || 0)}}</p>
+      <p>Remaining Leave = {{(leaveBalanceDetails?.casualDays || 0)}}</p>
     </div>
   </div>
   <div class="main1 card text-center">
     <div class="card-body ">
-      <p>Sick Leave = {{7-leaveBalanceDetails.sickDays}}</p>
-      <p>Remaining Leave = {{leaveBalanceDetails.sickDays}}</p>
+      <p>Sick Leave = {{7-(leaveBalanceDetails?.sickDays || 0)}}</p>
+      <p>Remaining Leave = {{(leaveBalanceDetails?.sickDays || 0)}}</p>
     </div>
   </div>
 </div>

@@ -43,6 +43,10 @@ export class EmployeeProfileComponent {
     conformPassword: new FormControl('',Validators.minLength(8)),
     beFroPassword: new FormControl('',Validators.minLength(8)),
   });
+  isUserNameChange: boolean=false;
+  userNameForm=new FormGroup({
+    userName: new FormControl('')
+  })
 
   ngOnInit(){
   this.getUsername();
@@ -77,11 +81,23 @@ export class EmployeeProfileComponent {
 
     })
   }
-  submit() {
+  submit(state: boolean) {
     const jsonData = JSON.stringify(this.applyForm.value);
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        this.openSnackBar('update Successful')
-    })
+        if(res.code == 201){
+          if(state){
+            const newEmp=res.data;
+            for(let emp of this.managerService.employees){
+              if(emp.userName === this.userName){
+                Object.assign(emp, newEmp);
+              }
+            }
+            this.toastr.success('Siociol media update Successful.','Siociol media update!')
+          }
+          else{this.toastr.success('Personal details update Successful.','Personal details update!')}
+        }else{
+          this.toastr.error(res.message,'500')
+        }})
     }
 
   edit() {
@@ -90,13 +106,7 @@ export class EmployeeProfileComponent {
 
   changePassword() {
     this.isChangePa= true;
-    if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '')){
-      const jsonData = JSON.stringify(this.applyForm.value);
-      this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        this.openSnackBar('update Successful')
-      })
-      this.isChangePa = false;
-    }
+
   }
 
   private isValidPassword(password1: string, password:string ): boolean{
@@ -135,14 +145,33 @@ export class EmployeeProfileComponent {
   submitPasword() {
     if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '') && (this.applyForm.valid)){
       const jsonData = JSON.stringify(this.applyForm.value);
-      console.log(jsonData)
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
         this.toastr.success('Password updated Successfully','Update Password')
       })
       this.isChangePa = false;
     }else {
+      this.toastr.success('Password updated Unsuccessfully','Update Password')
       this.isValid=true
     }
+  }
+  editUserName(){
+    this.isUserNameChange = !this.isUserNameChange;
+  }
+  changeUserName(username:string) {
+    if(username != undefined && username != null){
+      this.employeeService.updateUserName(username, this.username).subscribe((res) => {
+        if(res.code==200){
+          this.username = username;
+          this.userAuthService.setName(res.data);
+          this.toastr.success(res.message,'User Name change')
+        }else{
+          this.toastr.error(res.message,res.data)
+        }
+      })
+    }else {
+      this.toastr.error('Enter the user new user name','Unsuccessful Message')
+    }
+
   }
 
 }

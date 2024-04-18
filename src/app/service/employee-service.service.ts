@@ -8,7 +8,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class EmployeeServiceService {
   BASE_URL1 = "http://localhost:8080/api/v1/employee-manage";
   constructor(private http: HttpClient ) { }
-
+  employees: any=[];
 
 
   updateEmployee(jsonData: any,username:string) : Observable<any> {
@@ -18,5 +18,10 @@ export class EmployeeServiceService {
   getAllEmployeeCount(): Observable<any>{
     const url = `${this.BASE_URL1}/all-Employee-count`;
     return this.http.get<any>(url)
+  }
+
+  updateUserName(jsonData: string, userName: any): Observable<any> {
+    const url = `${this.BASE_URL1}/update-user-name/${userName}`;
+    return this.http.put(url,jsonData)
   }
 }

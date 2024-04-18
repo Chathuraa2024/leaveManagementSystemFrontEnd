@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {LeaveServiceService} from "../../../service/leave-service.service";
 import {UserAuthService} from "../../../service/user-auth.service";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
+import {EmployeeServiceService} from "../../../service/employee-service.service";
 
 
 @Component({
@@ -10,7 +11,7 @@ import {DataSharingServiceService} from "../../../service/data-sharing-service.s
   styleUrl: './leave-history.component.scss'
 })
 export class LeaveHistoryComponent {
-  employees: any=[];
+ employee: any=[]
   userName: string='';
   page: number=0;
   public leaveBalanceDetails: any ;
@@ -19,7 +20,9 @@ export class LeaveHistoryComponent {
     this.getUserName();
     this.pagination(this.page)
   }
-  constructor(private userAuthService: UserAuthService , private leaveService: LeaveServiceService) {
+  constructor(private userAuthService: UserAuthService ,
+              public leaveService: LeaveServiceService ,
+              ) {
   }
 
   getUserName(){
@@ -35,7 +38,9 @@ export class LeaveHistoryComponent {
   pagination(page: number){
     const size = 2;
     this.leaveService.getLeaveDetailsByUsername(this.userName,page,size).subscribe((res)=>{
-        this.employees = res.data.getLeaveByUsername;
+      console.log(res.data.getLeaveByUsername[0])
+      this.leaveService.leaveEmployee = res.data.getLeaveByUsername
+      console.log(this.leaveService.leaveEmployee)
       },error => {
         console.log(error)
       }

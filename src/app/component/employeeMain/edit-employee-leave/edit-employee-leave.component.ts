@@ -66,7 +66,6 @@ export class EditEmployeeLeaveComponent {
           }
         }
         this.toastr.success(res.massage,"Leave Edit")
-        this.router.navigate(['/leaveAdding']);
       },
       (error) => {
         this.toastr.error('Failed to edit leave due to internal error','500') })

@@ -60,7 +60,13 @@
                 </div>
               </div>
               <div class="mb-3 p-4 text-center">
-                <button [disabled]="applyForm.invalid" type="submit" class="btn btn-outline-primary form-control rounded-5 w-50 mx-auto">Apply Now</button>
+                <button
+                  [disabled]="isApplyButtonDisabled(applyForm.value)"
+                  type="submit"
+                  class="btn btn-outline-primary form-control rounded-5 w-50 mx-auto"
+                >
+                  Apply Now
+                </button>
               </div>
             </form>
           </div>

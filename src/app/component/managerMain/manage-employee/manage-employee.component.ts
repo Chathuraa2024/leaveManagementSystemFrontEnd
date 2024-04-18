@@ -13,6 +13,7 @@ export class ManageEmployeeComponent {
   constructor(private router:Router) {
   }
   addOne() {
+
     this.router.navigate(['/addEmployee'])
   }
 }

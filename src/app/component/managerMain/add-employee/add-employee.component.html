@@ -6,9 +6,18 @@
         <label for="userName">User Name<span>*</span></label>
         <input type="text" class="form-control" id="userName" formControlName="userName">
       </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('userName')?.touched && applyForm.get('userName')?.hasError('required')">
+        User Name is required.
+      </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('userName')?.touched && applyForm.get('userName')?.hasError('minlength')">
+        User Name must be at least 4 characters long.
+      </div>
       <div class="form-group">
         <label for="firstName">First Name<span>*</span></label>
         <input type="text" class="form-control" id="firstName" formControlName="firstName">
+      </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('firstName')?.touched && applyForm.get('firstName')?.hasError('required')">
+        First Name is required.
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
@@ -17,31 +26,46 @@
       <div class="form-group">
         <label for="gender">gender<span>*</span></label>
         <select class="form-select form-control form-select-lg mb-3" id="gender" formControlName="gender">
-          <option selected>Select Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
+      </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('gender')?.touched && applyForm.get('gender')?.hasError('required')">
+        Gender is required.
       </div>
       <div class="form-group">
         <label for="email">Email<span>*</span></label>
         <input type="email" class="form-control" id="email" formControlName="email">
       </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('email')?.touched && applyForm.get('email')?.hasError('required')">
+        Email is required.
+      </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('email')?.touched && applyForm.get('email')?.hasError('email')">
+        Email is not in a valid format.
+      </div>
       <div class="form-group">
         <label for="password">Password<span>*</span></label>
         <input type="password" class="form-control" id="password" formControlName="password">
       </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('password')?.touched && applyForm.get('password')?.hasError('required')">
+        Password is required.
+      </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('password')?.touched && applyForm.get('password')?.hasError('minLength')">
+        User Name must be at least 8 characters long.
+      </div>
       <div class="form-group">
         <label for="roles">Roles<span>*</span></label>
         <select class="form-select form-control form-select-lg mb-3" id="roles" formControlName="roles">
-          <option selected>Select Role Type</option>
           <option value="Employee">Employee</option>
           <option value="Manager">Manager</option>
         </select>
       </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('roles')?.touched && applyForm.get('roles')?.hasError('required')">
+        Roles is required.
+      </div>
       <div class="form-group">
         <label for="workerRole">Worker Role<span>*</span></label>
         <select class="form-select form-control form-select-lg mb-3" id="workerRole" formControlName="workerRole">
-          <option selected>Select Work Role</option>
           <option value="Software Engineer">Software Engineer</option>
           <option value="Quality Assurance (QA) Engineer">Quality Assurance (QA) Engineer</option>
           <option value="UI/UX Designer">UI/UX Designer</option>
@@ -52,19 +76,25 @@
           <option value="Business Analyst">Business Analyst</option>
         </select>
       </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('workerRole')?.touched && applyForm.get('workerRole')?.hasError('required')">
+        Worker Role is required.
+      </div>
       <div class="form-group">
         <label for="workSite">Work Site<span>*</span></label>
         <select class="form-select form-control form-select-lg mb-3" id="workSite" formControlName="workSite">
-          <option selected>Select Work Site</option>
           <option value="Kandy">Kandy</option>
           <option value="Colombo">Colombo</option>
         </select>
+      </div>
+      <div class="text-danger my-1" *ngIf="applyForm.get('workSite')?.touched && applyForm.get('workSite')?.hasError('required')">
+        Work Site is required.
       </div>
       <div class="form-group">
         <label for="currentProject">Current Project</label>
         <input type="text" class="form-control" id="currentProject" formControlName="currentProject">
       </div>
-      <button type="submit" *ngIf="this.applyForm.valid" class="btn btn-primary" data-bs-dismiss="modal" routerLink="/manageEmployee">Apply Now</button>
+      <div class="text-center">
+        <button type="submit"  [disabled]="applyForm.invalid" class="btn btn-primary" data-bs-dismiss="modal" routerLink="/manageEmployee">Apply Now</button></div>
     </form>
   </div>
 </div>

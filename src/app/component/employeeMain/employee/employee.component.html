@@ -22,7 +22,7 @@
           <div *ngIf="isRes">
             <div class="container">
               <div class="row">
-                <div *ngFor="let employee of leaveService.leaveEmployee; let i = index" class="col-md-6">
+                <div *ngFor="let employee of leaveService.leaveEmployeeHome; let i = index" class="col-md-6">
                   <div class="card d-flex flex-row my-5" style="width: auto; height: auto;">
                     <div class="card-body" style="">
                       <h5 class="card-title">{{employee.accept}}</h5>
@@ -48,7 +48,7 @@
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h3 class="modal-title fs-5" id="exampleModalLabel">edit leave request</h3>
+                                  <h3 class="modal-title fs-5" id="exampleModalLabel">Edit leave request</h3>
                                   <button (click)="clearCurrentEmployeeId()" type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                                 </div>
                                 <div class="modal-body">
@@ -64,7 +64,7 @@
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h3 class="modal-title fs-5" id="removeModalLabel">Remove leave</h3>
+                                  <h3 class="modal-title fs-5" id="removeModalLabel">Remove leave request</h3>
                                   <button (click)="clearCurrentEmployeeId()" type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                                 </div>
                                 <div class="modal-body text-center">

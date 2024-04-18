@@ -36,7 +36,6 @@ export class LeaveManageComponent {
       this.leaveService.getLeaveRequest().subscribe(
         (res)=> {
           this.leaveService.leaves=[]
-          console.log(res.data)
           let j =0
           if(id != undefined){
             for(let i =0 ;i< res.data.length;i++){
@@ -70,6 +69,7 @@ export class LeaveManageComponent {
             Object.assign(lev, newLeave);
           }
         }
+        this.toastr.success(res.message)
       })
   }
   confirmSubmission(accept: boolean, leaveId: number): void {

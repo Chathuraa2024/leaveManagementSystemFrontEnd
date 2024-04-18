@@ -12,6 +12,7 @@ export class LeaveServiceService {
   constructor(private http: HttpClient ) { }
   leaves: any = [];
   leaveEmployee: any=[]
+  leaveEmployeeHome: any=[]
   getLeaveRequest() : Observable<any> {
     const url = `${this.BASE_URL1}/get-all-leave`;
     return this.http.get(url)

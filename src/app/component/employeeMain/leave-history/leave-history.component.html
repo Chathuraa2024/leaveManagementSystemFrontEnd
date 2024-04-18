@@ -14,7 +14,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let employee of employees" >
+          <tr *ngFor="let employee of leaveService.leaveEmployee" >
             <td>{{employee.leaveType}}</td>
             <td>{{extractDateFromString(employee.startDate)}}</td>
             <td>{{extractDateFromString(employee.endDate)}}</td>

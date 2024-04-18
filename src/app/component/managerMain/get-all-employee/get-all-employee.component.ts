@@ -41,14 +41,17 @@ export class GetAllEmployeeComponent implements OnInit {
     try {
       if (firstName) {
         this.isSearch=true
+        this.employee=[];
         for (const emp of this.managerService.employees) {
           if (emp.firstname === firstName) {
             this.employee.push(emp)
-          }else{
+            console.log(this.employee)
+          }
+        }
+        if(this.employee.length === 0){
             this.isSearch=false
             this.pagination(this.page);
             this.toastr.warning('Please check the entered details and try again.',firstName+' Employee not found')
-          }
         }
       } else {
         this.isSearch=false
