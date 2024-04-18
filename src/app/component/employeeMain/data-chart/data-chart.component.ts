@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
 import {LeaveServiceService} from "../../../service/leave-service.service";
 import {UserAuthService} from "../../../service/user-auth.service";
+import {AudioService} from "../../../service/audio.service";
 
 @Component({
   selector: 'app-data-chart',
@@ -22,7 +23,8 @@ export class DataChartComponent {
 
   @ViewChild('myChart',{ static: false }) myChartCanvas?: ElementRef;
   @ViewChild('totalLeave',{ static: false }) totalLeaveCanvas?: ElementRef;
-  constructor(private userAuthService:UserAuthService ,private leaveService: LeaveServiceService) {
+  constructor(private userAuthService:UserAuthService ,private leaveService: LeaveServiceService,
+              private audioService:AudioService) {
   }
   ngAfterViewInit() {
     this.getUserName();

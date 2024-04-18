@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeServiceService} from "../../../service/employee-service.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
+import {AudioService} from "../../../service/audio.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-profile',
@@ -49,17 +51,20 @@ export class EmployeeProfileComponent {
   })
 
   ngOnInit(){
-  this.getUsername();
-  this.getEmployeeDetails();
+    this.getUsername();
+    this.getEmployeeDetails();
   }
   constructor(private userAuthService: UserAuthService ,
               private managerService: ManagerService ,
               private employeeService: EmployeeServiceService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private audioService: AudioService,
+              private router:Router) {
   }
 
   getUsername(){
     this.username = this.userAuthService.getName();
+    this.audioService.playButton()
   }
 
   getEmployeeDetails(){
@@ -82,35 +87,44 @@ export class EmployeeProfileComponent {
     })
   }
   submit(state: boolean) {
+    this.audioService.playButton()
     const jsonData = JSON.stringify(this.applyForm.value);
-      this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
-        if(res.code == 201){
-          if(state){
-            const newEmp=res.data;
-            for(let emp of this.managerService.employees){
-              if(emp.userName === this.userName){
-                Object.assign(emp, newEmp);
-              }
+    this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
+      if(res.code == 201){
+        if(state){
+          const newEmp=res.data;
+          for(let emp of this.managerService.employees){
+            if(emp.userName === this.userName){
+              Object.assign(emp, newEmp);
             }
-            this.toastr.success('Siociol media update Successful.','Siociol media update!')
           }
-          else{this.toastr.success('Personal details update Successful.','Personal details update!')}
-        }else{
-          this.toastr.error(res.message,'500')
-        }})
-    }
+          this.toastr.success('Siociol media update Successful.','Siociol media update!')
+          this.audioService.playSuccess()
+        }
+        else{
+          this.toastr.success('Personal details update Successful.','Personal details update!')
+          this.audioService.playSuccess()
+        }
+      }else{
+        this.audioService.playWrong()
+        this.toastr.error(res.message,'500')
+      }},error => {
+      this.audioService.playWrong()
+      this.toastr.error('update fail check again please','update fail!!')
+    })
+  }
 
   edit() {
+    this.audioService.playButton()
     this.isEdit = !this.isEdit;
   }
 
   changePassword() {
+    this.audioService.playButton()
     this.isChangePa= true;
-
   }
 
   private isValidPassword(password1: string, password:string ): boolean{
-    console.log(password1)
     const minLength: number = 8;
     const hasUpperCase: RegExp = /[A-Z]/;
     const hasLowerCase: RegExp = /[a-z]/;
@@ -138,23 +152,30 @@ export class EmployeeProfileComponent {
   }
 
   Back() {
+    this.audioService.playButton()
     this.isEdit= false;
     this.isChangePa = false;
   }
 
   submitPasword() {
+    this.audioService.playButton()
     if(this.isValidPassword(this.applyForm.value.newPassword ?? '' , this.applyForm.value.conformPassword ?? '') && (this.applyForm.valid)){
       const jsonData = JSON.stringify(this.applyForm.value);
       this.employeeService.updateEmployee(jsonData,this.username).subscribe((res)=>{
         this.toastr.success('Password updated Successfully','Update Password')
-      })
+        this.audioService.playSuccess()
+      },error => {
+        this.audioService.playWrong()
+        this.toastr.success('Password updated Unsuccessfully','Update Password')})
       this.isChangePa = false;
     }else {
+      this.audioService.playWrong()
       this.toastr.success('Password updated Unsuccessfully','Update Password')
       this.isValid=true
     }
   }
   editUserName(){
+    this.audioService.playButton()
     this.isUserNameChange = !this.isUserNameChange;
   }
   changeUserName(username:string) {
@@ -163,15 +184,25 @@ export class EmployeeProfileComponent {
         if(res.code==200){
           this.username = username;
           this.userAuthService.setName(res.data);
+          this.audioService.playSuccess()
           this.toastr.success(res.message,'User Name change')
+          this.clean()
         }else{
+          this.audioService.playWrong()
           this.toastr.error(res.message,res.data)
         }
+      },error => {
+        this.audioService.playWrong()
+        this.toastr.error("internal server error.user name always exit", '500')
       })
     }else {
+      this.audioService.playWrong()
       this.toastr.error('Enter the user new user name','Unsuccessful Message')
     }
-
+  }
+  public clean(){
+    this.userAuthService.clear()
+    this.router.navigate(['/login'])
   }
 
 }

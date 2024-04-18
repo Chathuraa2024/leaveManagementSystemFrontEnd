@@ -32,7 +32,7 @@ export class LeaveManageComponent {
     this.id = this.dataSharingService.getData();
     this.getLeaveRequest(this.id);
   }
-  getLeaveRequest(id: number){
+  getLeaveRequest(id?: number | undefined){
       this.leaveService.getLeaveRequest().subscribe(
         (res)=> {
           this.leaveService.leaves=[]
@@ -109,5 +109,9 @@ export class LeaveManageComponent {
   viewEmployee(userName: string) {
     const url = `/updateEmployee/${userName}`
     this.router.navigate([url])
+  }
+
+  Refresh() {
+    this.getLeaveRequest();
   }
 }

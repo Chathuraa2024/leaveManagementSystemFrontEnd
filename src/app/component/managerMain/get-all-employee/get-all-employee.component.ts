@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
 import {Subscription} from "rxjs";
 import {ToastrService} from "ngx-toastr";
+import {AudioService} from "../../../service/audio.service";
 
 @Component({
   selector: 'app-get-all-employee',
@@ -21,18 +22,21 @@ export class GetAllEmployeeComponent implements OnInit {
   private id?: string;
   constructor(public managerService: ManagerService ,
               private router : Router , private dataSharingService:DataSharingServiceService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private audioService: AudioService) {
   }
   ngOnInit(){
     this.pagination(this.page)
     this.isDelete =false;
   }
   delete(id: string,firstName:string){
+    this.audioService.playButton()
     this.id = id;
     this.dataSharingService.setData([id,firstName]);
     this.isDelete =true
   }
   updateEmployee(userName: string){
+    this.audioService.playButton()
     this.dataSharingService.setData(this.managerService.employees);
     const url = `/updateEmployee/${userName}`
     this.router.navigate([url])

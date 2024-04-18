@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DataSharingServiceService} from "../../../../service/data-sharing-service.service";
 import {EMPTY, Observable} from "rxjs";
 import {EmployeeServiceService} from "../../../../service/employee-service.service";
+import {AudioService} from "../../../../service/audio.service";
 
 @Component({
   selector: 'app-manager',
@@ -28,11 +29,13 @@ export class ManagerComponent {
     });
     this.getLeaveDetails();
   }
+
   constructor(private employeeService: EmployeeServiceService,
               private leaveService : LeaveServiceService,
               private activatedRoute : ActivatedRoute,
               private router: Router,
-              private dataSharingService: DataSharingServiceService ) {
+              private dataSharingService: DataSharingServiceService,
+              private audioService: AudioService) {
   }
   getLeaveDetails(){
     this.leaveService.getLeaveRequest().subscribe((res)=>{
@@ -61,6 +64,7 @@ export class ManagerComponent {
     return match ? match[1] : null;
   }
   goLeaveManage(id : number) {
+    this.audioService.playButton()
     this.dataSharingService.setData(id);
     this.router.navigate(["/leaveManage"])
   }

@@ -10,12 +10,11 @@ import {LoginServiceService} from "../../service/login-service.service";
 })
 export class SideBarComponent {
   sidebarVisible: boolean = true;
-  public clicked1 = false
-  public clicked2 = false
-  public clicked3 = false
-  public clicked4 = false
   public userName : string='';
-  constructor(private router:Router ,public loginService : LoginServiceService, private userAuthService: UserAuthService) {
+  constructor(private router:Router ,
+              public loginService : LoginServiceService,
+              private userAuthService: UserAuthService,
+              ) {
         }
   ngOnInit() {
     this.userName=this.userAuthService.getName()

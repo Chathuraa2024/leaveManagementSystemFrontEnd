@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import * as emailjs from 'emailjs-com';
+import {AudioService} from "../../../service/audio.service";
 
 
 @Component({
@@ -33,11 +34,13 @@ export class AddEmployeeComponent{
 
   constructor(private managerService: ManagerService ,
               private router: Router,
-              private toastr: ToastrService
+              private toastr: ToastrService,
+              private audioService: AudioService,
   ) {
   }
 
   submitApplication(){
+    this.audioService.playButton()
     const jsonData = JSON.stringify(this.applyForm.value);
     this.managerService.addEmployee(jsonData).subscribe((res) => {
         if(res.code == 200){

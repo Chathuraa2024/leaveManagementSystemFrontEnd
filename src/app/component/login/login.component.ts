@@ -5,6 +5,7 @@ import {UserAuthService} from "../../service/user-auth.service";
 import {Router} from "@angular/router";
 import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
+import {AudioService} from "../../service/audio.service";
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent{
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private loginService:LoginServiceService, private userAuthService: UserAuthService ,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private audioService:AudioService) {
   }
 
   login(loginForm: NgForm){
@@ -36,11 +38,14 @@ export class LoginComponent{
             isOpen = true;
             const url = `/manager/${loginForm.value.username}`
             this.router.navigate([url])
+
             this.toastr.success('Welcome back! '+loginForm.value.username,'Login successful!')
           }else{
+            this.audioService.playSoundWelcome()
             isOpen = false;
             const url = `/employee/${loginForm.value.username}`
             this.router.navigate([url])
+
             this.toastr.success('Welcome back! '+loginForm.value.username,'Login successful!')
           }
         },

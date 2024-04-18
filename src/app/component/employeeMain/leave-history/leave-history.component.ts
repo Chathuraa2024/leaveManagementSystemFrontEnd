@@ -3,6 +3,7 @@ import {LeaveServiceService} from "../../../service/leave-service.service";
 import {UserAuthService} from "../../../service/user-auth.service";
 import {DataSharingServiceService} from "../../../service/data-sharing-service.service";
 import {EmployeeServiceService} from "../../../service/employee-service.service";
+import {AudioService} from "../../../service/audio.service";
 
 
 @Component({
@@ -19,9 +20,11 @@ export class LeaveHistoryComponent {
   ngOnInit(){
     this.getUserName();
     this.pagination(this.page)
+    this.audioService.playButton()
   }
   constructor(private userAuthService: UserAuthService ,
               public leaveService: LeaveServiceService ,
+              private audioService: AudioService
               ) {
   }
 

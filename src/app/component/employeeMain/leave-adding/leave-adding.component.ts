@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {UserAuthService} from "../../../service/user-auth.service";
 import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
+import {AudioService} from "../../../service/audio.service";
 
 @Component({
   selector: 'app-leave-adding',
@@ -31,32 +32,37 @@ export class LeaveAddingComponent {
     private leaveService:LeaveServiceService,
     private router: Router,
     private userAuthService : UserAuthService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private audioService:AudioService) {
   }
 
   ngOnInit(){
     this.getUserName();
+    this.audioService.playButton()
   }
 
 
   submitApplication(){
+    this.audioService.playButton()
     this.applyForm.patchValue({employeeId: this.userName});
     const jsonData = JSON.stringify(this.applyForm.value);
-    console.log(jsonData)
     this.leaveService.addLeave(jsonData).subscribe((res) => {
         if(res.code == 200){
           const leave = res.data;
           this.leaveService.leaveEmployee.push(leave)
           console.log(this.leaveService.leaveEmployee)
           this.toastr.success(res.massage,res.code)
+          this.audioService.playSuccess()
           this.applyForm.reset();
           const url = `/employee/${this.userName}`
           this.router.navigate([url])
         }else{
+          this.audioService.playWrong()
           this.toastr.warning(res.massage,res.data)
         }
       },
       (error) => {
+      this.audioService.playWrong()
       this.toastr.error('you always add leave these days','leave Submission fails!' )
     })
   }

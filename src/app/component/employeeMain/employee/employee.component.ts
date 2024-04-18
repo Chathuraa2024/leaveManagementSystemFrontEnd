@@ -2,6 +2,7 @@ import {Component, SimpleChanges} from '@angular/core';
 import {LeaveServiceService} from "../../../service/leave-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {AudioService} from "../../../service/audio.service";
 
 
 @Component({
@@ -30,11 +31,13 @@ export class EmployeeComponent {
       this.userName = params['userName'];
     });
     this.getLeaveDetails();
+
   }
   constructor(public leaveService : LeaveServiceService,
               private activatedRoute : ActivatedRoute,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private audioService: AudioService) {
   }
 
   setCurrentEmployeeId(id: number) {
@@ -75,14 +78,18 @@ extractDateFromString(dateString: string): string | null {
     return match ? match[1] : null;
   }
   descript(){
+    this.audioService.playButton()
      this.isShow = true;
   }
   edit(id: number) {
+    this.audioService.playButton()
     const url = `editLeave/${id}`
     this.router.navigate([url])
   }
   remove(id : number) {
+    this.audioService.playButton()
     this.leaveService.deleteLeaveRequest(id).subscribe(req=>{
+      this.audioService.playSuccess()
       this.toastr.success('Your Leave Request has been successfully deleted',"Leave Request Successfully Deleted")
       this.leaveService.leaveEmployeeHome = this.leaveService.leaveEmployeeHome.filter((emp: any) => emp.id !== id);
     })
