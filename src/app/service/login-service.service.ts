@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserAuthService} from "./user-auth.service";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
-  BASE_URL = "http://localhost:8080/api/v1";
+  BASE_URL = environment.apiUrl+"/v1";
   userName: string='';
   requestHeader = new HttpHeaders(
     {"No-Auth":"True"}

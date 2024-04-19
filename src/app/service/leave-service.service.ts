@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeaveServiceService {
-  BASE_URL1 = "http://localhost:8080/api/v1/leave-manage";
-  BASE_URL2 = "http://localhost:8080/api/v1/manager-control";
-  BASE_URL3 = "http://localhost:8080/api/v1/leave-balance";
+  BASE_URL1 = environment.apiUrl+"/v1/leave-manage";
+  BASE_URL2 = environment.apiUrl+"/v1/manager-control";
+  BASE_URL3 = environment.apiUrl+"/v1/leave-balance";
   constructor(private http: HttpClient ) { }
   leaves: any = [];
   leaveEmployee: any=[]

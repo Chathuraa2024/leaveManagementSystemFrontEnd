@@ -41,9 +41,9 @@ export class EmployeeProfileComponent {
     pemail:new FormControl('',Validators.email),
     skype:new FormControl(''),
     status: new FormControl(''),
-    newPassword: new FormControl(''),
-    conformPassword: new FormControl('',Validators.minLength(8)),
-    beFroPassword: new FormControl('',Validators.minLength(8)),
+    newPassword: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    conformPassword: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    beFroPassword: new FormControl('',Validators.required),
   });
   isUserNameChange: boolean=false;
   userNameForm=new FormGroup({
@@ -166,12 +166,13 @@ export class EmployeeProfileComponent {
         this.audioService.playSuccess()
       },error => {
         this.audioService.playWrong()
-        this.toastr.success('Password updated Unsuccessfully','Update Password')})
+        this.toastr.error('Password updated Unsuccessfully. Internal Server Error','Update Password')})
       this.isChangePa = false;
     }else {
       this.audioService.playWrong()
-      this.toastr.success('Password updated Unsuccessfully','Update Password')
+      this.toastr.error('Password updated Unsuccessfully. Invalid password check and enter again','Update Password')
       this.isValid=true
+      this.isChangePa = false;
     }
   }
   editUserName(){

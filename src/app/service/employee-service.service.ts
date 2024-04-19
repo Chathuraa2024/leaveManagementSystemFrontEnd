@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeServiceService {
-  BASE_URL1 = "http://localhost:8080/api/v1/employee-manage";
+  BASE_URL1 = environment.apiUrl+"/v1/employee-manage";
   constructor(private http: HttpClient ) { }
   employees: any=[];
 

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManagerService {
   employees:any=[]
-  BASE_URL = "http://localhost:8080/api/v1/manager-control";
+
+  BASE_URL = environment.apiUrl+"/v1/manager-control";
+
   requestHeader = new HttpHeaders(
     {"No-Auth":"True"}
   );

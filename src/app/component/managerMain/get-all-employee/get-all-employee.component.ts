@@ -43,13 +43,13 @@ export class GetAllEmployeeComponent implements OnInit {
   }
   search(firstName: string) {
     try {
+      this.audioService.playButton()
       if (firstName) {
         this.isSearch=true
         this.employee=[];
         for (const emp of this.managerService.employees) {
           if (emp.firstname === firstName) {
             this.employee.push(emp)
-            console.log(this.employee)
           }
         }
         if(this.employee.length === 0){

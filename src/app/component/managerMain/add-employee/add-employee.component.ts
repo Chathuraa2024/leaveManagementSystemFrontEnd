@@ -47,17 +47,19 @@ export class AddEmployeeComponent{
           const employee = res.data;
           this.toastr.success(res.massage,res.code)
           this.managerService.employees.push(employee);
+          this.audioService.playSuccess()
           this.sendEmail(employee.userName , employee.firstname);
           this.applyForm.reset({
             email: '@company.com',
             password: 'w'+Math.floor(Math.random() * 10)+'l'+Math.floor(Math.random() * 20)+'c0'+'m'+Math.floor(Math.random() * 5)+'T'+Math.floor(Math.random() * 7)
-
           });
         }else {
+          this.audioService.playWrong()
           this.toastr.error(res.massage,res.data)
         }
       },
       (error) => {
+        this.audioService.playWrong()
         this.toastr.error('Unable to connect to the server. Please check your network connection and try again','504') })
 
   }

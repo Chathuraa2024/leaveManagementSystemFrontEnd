@@ -4,31 +4,31 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AudioService {
-  private audio = new Audio();
 
   constructor() {
 
   }
 
   playSoundWelcome(): void {
-    this.audio.src = '/assets/welcome.mp3';
-    this.audio.load();
-    this.audio.play().catch(error => console.error("Error playing the sound.", error));
+    var audio = new Audio('/assets/welcome.mp3');
+    audio.play().catch(error => console.error("Error playing the sound.", error));
   }
 
   playButton(): void{
-    this.audio.src = '/assets/buttonClick.mp3';
-    this.audio.load();
-    this.audio.play().catch(error => console.error("Error playing the sound.", error));
+    var audio = new Audio('/assets/buttonClick.mp3');
+    audio.play().catch(error => console.error("Error playing the sound.", error));
   }
   playSuccess(): void{
-    this.audio.src = '/assets/success.mp3';
-    this.audio.load();
-    this.audio.play().catch(error => console.error("Error playing the sound.", error));
+    var audio = new Audio('/assets/success.mp3');
+    audio.play().catch(error => console.error("Error playing the sound.", error));
   }
-  playWrong(): void{
-    this.audio.src = '/assets/wrong.wav';
-    this.audio.load();
-    this.audio.play().catch(error => console.error("Error playing the sound.", error));
+  playWrong(): void {
+    var audio = new Audio('/assets/wrong.wav');
+    audio.play().catch(error => console.error("Error playing the sound.", error));
+  }
+
+  deleteEmp(): void{
+    var audio = new Audio('/assets/deleteEmp.mp3');
+    audio.play().catch(error => console.error("Error playing the sound.", error));
   }
 }
